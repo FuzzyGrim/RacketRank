@@ -1,22 +1,25 @@
 {% load static %}
 
 <!DOCTYPE html>
-<html lang="en">
+<html class="h-full bg-white" lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="RacketRank, Tennis Rankings">
     <meta name="description" content="RacketRank is a website that allows you to track tournaments, players, and rankings in tennis.">
+  
+    <link rel="shortcut icon" href="{% static "favicon/favicon.ico" %}">
+
     <link href="{% static 'app/styles.css' %}" rel="stylesheet">
 
     <title>
-        RacketRank
+        {% block title %}
+        {% endblock title %}
     </title>
   </head>
 
-  <body>
-    <h1 class="text-3xl font-bold underline">
-        Hello world!
-    </h1>
+  <body class="h-full">
+    {% block body %}
+    {% endblock body %}
   </body>
 </html>

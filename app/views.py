@@ -6,5 +6,6 @@ def login(request):
     return render(request, "app/login.html", context)
 
 def register(request):
+def password_reset(request):
     context = {}
-    return render(request, "app/register.html", context)
+    return render(request, "app/password-reset.html", context)

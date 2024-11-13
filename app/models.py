@@ -5,4 +5,4 @@ from phonenumber_field.modelfields import PhoneNumberField
 class User(AbstractUser):
     """Custom user model."""
 
-    phone_number = PhoneNumberField(unique=True)
+    telefono = PhoneNumberField(unique=True)

@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 
+from decouple import config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -131,3 +133,9 @@ AUTH_USER_MODEL = "app.User"
 PHONENUMBER_DEFAULT_REGION = "ES"
 LOGIN_REDIRECT_URL = "home"
 LOGIN_URL = "login"
+EMAIL_USE_TLS = True
+EMAIL_HOST = "smtp.mailgun.org"
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

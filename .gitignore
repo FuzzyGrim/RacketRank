@@ -3,3 +3,4 @@ venv
 node_modules
 db.sqlite3
 .ruff_cache
+.env

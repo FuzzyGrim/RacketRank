@@ -32,6 +32,16 @@
             ¡Bienvenido de vuelta a RacketRank! Nos alegra verte nuevamente. Inicia sesión para continuar disfrutando de todas las funcionalidades que tenemos.
           </p>
 
+          {% if messages %}
+            <div class="messages mt-5">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+          {% endif %}
+
           <form action="#" class="mt-8 grid grid-cols-6 gap-6">
 
             <div class="col-span-6">
@@ -65,7 +75,8 @@
 
               <p class="mt-4 text-sm text-gray-500 sm:mt-0">
                 ¿No tienes una cuenta?
-                <a href="{% url 'register' %}" class="text-emerald-700 hover:text-emerald-600 underline">Regístrate ahora</a>.
+                <a href="{% url 'register' %}"
+                   class="text-emerald-700 hover:text-emerald-600 underline">Regístrate ahora</a>.
               </p>
             </div>
           </form>

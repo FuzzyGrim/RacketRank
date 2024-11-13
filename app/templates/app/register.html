@@ -34,73 +34,106 @@
             tenis.
           </p>
 
-          <form action="#" class="mt-8 grid grid-cols-6 gap-6">
-            <div class="col-span-6 sm:col-span-3">
-              <label for="FirstName" class="block text-sm font-medium text-gray-700">Nombre</label>
+          {% if messages %}
+            <div class="messages mt-5">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+          {% endif %}
 
+          <form method="post" class="mt-8 grid grid-cols-6 gap-6">
+            {% csrf_token %}
+
+            {% if form.errors %}
+            <div class="col-span-6 mt-4">
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <p>{{ field.label }}: {{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <div class="col-span-6 sm:col-span-3">
+              <label for="first_name" class="block text-sm font-medium text-gray-700">Nombre</label>
               <input type="text"
-                     id="FirstName"
+                     id="first_name"
                      name="first_name"
-                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
+                     required
+                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                     value="{{ form.first_name.value|default:'' }}" />
             </div>
 
             <div class="col-span-6 sm:col-span-3">
-              <label for="LastName" class="block text-sm font-medium text-gray-700">Apellido</label>
-
+              <label for="last_name" class="block text-sm font-medium text-gray-700">Apellido</label>
               <input type="text"
-                     id="LastName"
+                     id="last_name"
                      name="last_name"
-                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
+                     required
+                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                     value="{{ form.last_name.value|default:'' }}" />
             </div>
 
             <div class="col-span-6 sm:col-span-3">
-              <label for="FirstName" class="block text-sm font-medium text-gray-700">Nombre de usuario</label>
-
+              <label for="username" class="block text-sm font-medium text-gray-700">Nombre de usuario</label>
               <input type="text"
-                     id="FirstName"
-                     name="first_name"
-                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
+                     id="username"
+                     name="username"
+                     required
+                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                     value="{{ form.username.value|default:'' }}" />
             </div>
 
             <div class="col-span-6 sm:col-span-3">
-              <label for="LastName" class="block text-sm font-medium text-gray-700">Teléfono</label>
-
+              <label for="phone_number" class="block text-sm font-medium text-gray-700">Teléfono</label>
               <input type="text"
-                     id="LastName"
-                     name="last_name"
-                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
+                     pattern="[0-9]{8-12}"
+                     id="phone_number"
+                     name="phone_number"
+                     required
+                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                     value="{{ form.phone_number.value|default:'' }}" />
             </div>
 
             <div class="col-span-6">
-              <label for="Email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
-
+              <label for="email" class="block text-sm font-medium text-gray-700">Correo electrónico</label>
               <input type="email"
-                     id="Email"
+                     id="email"
                      name="email"
+                     required
+                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                     value="{{ form.email.value|default:'' }}" />
+            </div>
+
+            <div class="col-span-6 sm:col-span-3">
+              <label for="password1" class="block text-sm font-medium text-gray-700">Contraseña</label>
+              <input type="password"
+                     id="password1"
+                     name="password1"
+                     required
                      class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
             </div>
 
             <div class="col-span-6 sm:col-span-3">
-              <label for="Password" class="block text-sm font-medium text-gray-700">Contraseña</label>
-
+              <label for="password2" class="block text-sm font-medium text-gray-700">Confirmación de contraseña</label>
               <input type="password"
-                     id="Password"
-                     name="password"
-                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
-            </div>
-
-            <div class="col-span-6 sm:col-span-3">
-              <label for="PasswordConfirmation"
-                     class="block text-sm font-medium text-gray-700">Confirmación de contraseña</label>
-
-              <input type="password"
-                     id="PasswordConfirmation"
-                     name="password_confirmation"
+                     id="password2"
+                     name="password2"
+                     required
                      class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
             </div>
 
             <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-              <button class="inline-block shrink-0 rounded-md border border-emerald-600 bg-emerald-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-emerald-600 focus:outline-none focus:ring active:text-emerald-500">
+              <button type="submit" 
+                      class="inline-block shrink-0 rounded-md border border-emerald-600 bg-emerald-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-emerald-600 focus:outline-none focus:ring active:text-emerald-500">
                 Regístrate
               </button>
 

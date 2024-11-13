@@ -128,3 +128,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # APP settings
 AUTH_USER_MODEL = "app.User"
+PHONENUMBER_DEFAULT_REGION= "ES"

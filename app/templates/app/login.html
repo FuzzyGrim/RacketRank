@@ -42,7 +42,16 @@
             </div>
           {% endif %}
 
-          <form action="#" class="mt-8 grid grid-cols-6 gap-6">
+          <form method="post" class="mt-8 grid grid-cols-6 gap-6">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+            <div class="col-span-6">
+                <div class="alert alert-error">
+                    {{ form.non_field_errors }}
+                </div>
+            </div>
+            {% endif %}
 
             <div class="col-span-6">
               <label for="username" class="block text-sm font-medium text-gray-700">Nombre de usuario</label>
@@ -50,14 +59,21 @@
               <input type="text"
                      id="username"
                      name="username"
-                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
+                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm {% if form.username.errors %}border-red-500{% endif %}"
+                     value="{{ form.username.value|default:'' }}" />
+
+              {% if form.username.errors %}
+              <p class="mt-1 text-sm text-red-600">
+                  {{ form.username.errors|join:", " }}
+              </p>
+              {% endif %}
             </div>
 
             <div class="col-span-6">
               <div class="flex items-center justify-between">
                 <label for="password" class="block text-sm font-medium text-gray-700">Contraseña</label>
                 <div class="text-sm">
-                  <a href="{% url "recovery" %}"
+                  <a href="{% url 'recovery' %}"
                      class="font-semibold text-emerald-600 hover:text-emerald-500">¿Contraseña olvidada?</a>
                 </div>
               </div>
@@ -65,11 +81,18 @@
               <input type="password"
                      id="password"
                      name="password"
-                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
+                     class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm {% if form.password.errors %}border-red-500{% endif %}" />
+
+              {% if form.password.errors %}
+              <p class="mt-1 text-sm text-red-600">
+                  {{ form.password.errors|join:", " }}
+              </p>
+              {% endif %}
             </div>
 
             <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-              <button class="inline-block shrink-0 rounded-md border border-emerald-600 bg-emerald-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-emerald-600 focus:outline-none focus:ring active:text-emerald-500">
+              <button type="submit"
+                      class="inline-block shrink-0 rounded-md border border-emerald-600 bg-emerald-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-emerald-600 focus:outline-none focus:ring active:text-emerald-500">
                 Iniciar sesión
               </button>
 

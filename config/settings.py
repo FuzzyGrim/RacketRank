@@ -81,7 +81,7 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
-    }
+    },
 }
 
 
@@ -128,4 +128,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # APP settings
 AUTH_USER_MODEL = "app.User"
-PHONENUMBER_DEFAULT_REGION= "ES"
+PHONENUMBER_DEFAULT_REGION = "ES"
+LOGIN_REDIRECT_URL = "home"
+LOGIN_URL = "login"

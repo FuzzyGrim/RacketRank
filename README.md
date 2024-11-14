@@ -22,3 +22,9 @@ pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 ```
+
+Para cargar los datos de prueba, ejecutar el siguiente comando:
+
+```
+python manage.py loaddata fixtures.json
+```

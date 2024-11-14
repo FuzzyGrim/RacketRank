@@ -1,0 +1,275 @@
+[
+    {
+      "model": "app.user",
+      "pk": 1,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty123$9XjhgF",
+        "last_login": "2024-11-14T10:00:00Z",
+        "is_superuser": false,
+        "username": "carmen.garcia",
+        "first_name": "Carmen",
+        "last_name": "García Ruiz",
+        "email": "carmen.garcia@ejemplo.es",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-14T10:00:00Z",
+        "telefono": "+34611222333"
+      }
+    },
+    {
+      "model": "app.user",
+      "pk": 2,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty124$9XjhgF",
+        "last_login": "2024-11-14T10:00:00Z",
+        "is_superuser": false,
+        "username": "antonio.lopez",
+        "first_name": "Antonio",
+        "last_name": "López Martínez",
+        "email": "antonio.lopez@ejemplo.es",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-14T10:00:00Z",
+        "telefono": "+34622333444"
+      }
+    },
+    {
+      "model": "app.user",
+      "pk": 3,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty125$9XjhgF",
+        "last_login": "2024-11-14T10:00:00Z",
+        "is_superuser": false,
+        "username": "isabel.fernandez",
+        "first_name": "Isabel",
+        "last_name": "Fernández Sánchez",
+        "email": "isabel.fernandez@ejemplo.es",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-14T10:00:00Z",
+        "telefono": "+34633444555"
+      }
+    },
+    {
+      "model": "app.user",
+      "pk": 4,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty126$9XjhgF",
+        "last_login": "2024-11-14T10:00:00Z",
+        "is_superuser": false,
+        "username": "manuel.rodriguez",
+        "first_name": "Manuel",
+        "last_name": "Rodríguez Navarro",
+        "email": "manuel.rodriguez@ejemplo.es",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-14T10:00:00Z",
+        "telefono": "+34644555666"
+      }
+    },
+    {
+      "model": "app.user",
+      "pk": 5,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty127$9XjhgF",
+        "last_login": "2024-11-14T10:00:00Z",
+        "is_superuser": false,
+        "username": "laura.moreno",
+        "first_name": "Laura",
+        "last_name": "Moreno Torres",
+        "email": "laura.moreno@ejemplo.es",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-14T10:00:00Z",
+        "telefono": "+34655666777"
+      }
+    },
+    {
+      "model": "app.user",
+      "pk": 6,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty128$9XjhgF",
+        "last_login": "2024-11-14T10:00:00Z",
+        "is_superuser": false,
+        "username": "javier.jimenez",
+        "first_name": "Javier",
+        "last_name": "Jiménez Ortiz",
+        "email": "javier.jimenez@ejemplo.es",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-14T10:00:00Z",
+        "telefono": "+34666777888"
+      }
+    },
+    {
+      "model": "app.user",
+      "pk": 7,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty129$9XjhgF",
+        "last_login": "2024-11-14T10:00:00Z",
+        "is_superuser": false,
+        "username": "ana.perez",
+        "first_name": "Ana",
+        "last_name": "Pérez Romero",
+        "email": "ana.perez@ejemplo.es",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-14T10:00:00Z",
+        "telefono": "+34677888999"
+      }
+    },
+    {
+      "model": "app.user",
+      "pk": 8,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty130$9XjhgF",
+        "last_login": "2024-11-14T10:00:00Z",
+        "is_superuser": false,
+        "username": "david.munoz",
+        "first_name": "David",
+        "last_name": "Muñoz Vega",
+        "email": "david.munoz@ejemplo.es",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-14T10:00:00Z",
+        "telefono": "+34688999000"
+      }
+    },
+    {
+      "model": "app.user",
+      "pk": 9,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty131$9XjhgF",
+        "last_login": "2024-11-14T10:00:00Z",
+        "is_superuser": false,
+        "username": "maria.santos",
+        "first_name": "María",
+        "last_name": "Santos Díaz",
+        "email": "maria.santos@ejemplo.es",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-14T10:00:00Z",
+        "telefono": "+34699000111"
+      }
+    },
+    {
+      "model": "app.user",
+      "pk": 10,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty132$9XjhgF",
+        "last_login": "2024-11-14T10:00:00Z",
+        "is_superuser": false,
+        "username": "pablo.ruiz",
+        "first_name": "Pablo",
+        "last_name": "Ruiz Castro",
+        "email": "pablo.ruiz@ejemplo.es",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-14T10:00:00Z",
+        "telefono": "+34600111222"
+      }
+    },
+    {
+      "model": "app.user",
+      "pk": 11,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty133$9XjhgF",
+        "last_login": "2024-11-14T10:00:00Z",
+        "is_superuser": false,
+        "username": "lucia.martin",
+        "first_name": "Lucía",
+        "last_name": "Martín Flores",
+        "email": "lucia.martin@ejemplo.es",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-14T10:00:00Z",
+        "telefono": "+34611333444"
+      }
+    },
+    {
+      "model": "app.user",
+      "pk": 12,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty134$9XjhgF",
+        "last_login": "2024-11-14T10:00:00Z",
+        "is_superuser": false,
+        "username": "carlos.gomez",
+        "first_name": "Carlos",
+        "last_name": "Gómez Reyes",
+        "email": "carlos.gomez@ejemplo.es",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-14T10:00:00Z",
+        "telefono": "+34622444555"
+      }
+    },
+    {
+      "model": "app.user",
+      "pk": 13,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty135$9XjhgF",
+        "last_login": "2024-11-14T10:00:00Z",
+        "is_superuser": false,
+        "username": "elena.torres",
+        "first_name": "Elena",
+        "last_name": "Torres Blanco",
+        "email": "elena.torres@ejemplo.es",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-14T10:00:00Z",
+        "telefono": "+34633555666"
+      }
+    },
+    {
+      "model": "app.user",
+      "pk": 14,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty136$9XjhgF",
+        "last_login": "2024-11-14T10:00:00Z",
+        "is_superuser": false,
+        "username": "miguel.herrera",
+        "first_name": "Miguel",
+        "last_name": "Herrera Campos",
+        "email": "miguel.herrera@ejemplo.es",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-14T10:00:00Z",
+        "telefono": "+34644666777"
+      }
+    },
+    {
+      "model": "app.user",
+      "pk": 15,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty137$9XjhgF",
+        "last_login": "2024-11-14T10:00:00Z",
+        "is_superuser": false,
+        "username": "sofia.navarro",
+        "first_name": "Sofía",
+        "last_name": "Navarro Ramos",
+        "email": "sofia.navarro@ejemplo.es",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-14T10:00:00Z",
+        "telefono": "+34655777888"
+      }
+    },
+    {
+      "model": "app.user",
+      "pk": 16,
+      "fields": {
+        "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty138$9XjhgF",
+        "last_login": "2024-11-14T10:00:00Z",
+        "is_superuser": false,
+        "username": "diego.molina",
+        "first_name": "Diego",
+        "last_name": "Molina Cruz",
+        "email": "diego.molina@ejemplo.es",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2024-11-14T10:00:00Z",
+        "telefono": "+34666888999"
+      }
+    }
+  ]
+  

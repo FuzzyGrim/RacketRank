@@ -132,10 +132,13 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # APP settings
-AUTH_USER_MODEL = "app.User"
-PHONENUMBER_DEFAULT_REGION = "ES"
 LOGIN_REDIRECT_URL = "home"
 LOGIN_URL = "login"
+LOGOUT_REDIRECT_URL = "login"
+
+AUTH_USER_MODEL = "app.User"
+PHONENUMBER_DEFAULT_REGION = "ES"
+
 EMAIL_USE_TLS = True
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")

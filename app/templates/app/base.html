@@ -6,20 +6,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="RacketRank, Tennis Rankings">
-    <meta name="description" content="RacketRank is a website that allows you to track tournaments, players, and rankings in tennis.">
-  
+    <meta name="description"
+          content="RacketRank is a website that allows you to track tournaments, players, and rankings in tennis.">
+
     <link rel="shortcut icon" href="{% static "favicon.ico" %}">
 
     <link href="{% static 'app/styles.css' %}" rel="stylesheet">
 
     <title>
-        {% block title %}
-        {% endblock title %}
+      {% block title %}
+      {% endblock title %}
     </title>
   </head>
 
   <body class="h-full">
     {% block body %}
+      <nav class="bg-white shadow">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div class="flex h-16 justify-between">
+            <div class="flex">
+              <div class="flex shrink-0 items-center">
+                <img class="h-8 w-auto"
+                     src="https://tailwindui.com/plus/img/logos/mark.svg?color=emerald&shade=600"
+                     alt="RacketRank">
+              </div>
+              <div class="hidden md:ml-6 md:flex md:space-x-8">
+                <a href="#"
+                   class="inline-flex items-center border-b-2 border-emerald-500 px-1 pt-1 text-sm font-medium text-gray-900">Torneos</a>
+                <a href="#"
+                   class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Ranking Global</a>
+                <a href="#"
+                   class="inline-flex items-center border-b-2 border-transparent px-1 pt-1 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Estadísticas Personal</a>
+              </div>
+            </div>
+            <div class="flex items-center">
+              <div class="shrink-0">
+                <button type="button"
+                        class="relative inline-flex items-center gap-x-1.5 rounded-md bg-emerald-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600">
+                  <svg class="-ml-0.5 size-5"
+                       viewBox="0 0 20 20"
+                       fill="currentColor"
+                       aria-hidden="true"
+                       data-slot="icon">
+                    <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+                  </svg>
+                  Button
+                </button>
+              </div>
+              <div class="hidden md:ml-4 md:flex md:shrink-0 md:items-center">
+                <!-- Profile dropdown -->
+                <div class="relative ml-3">
+                  <div>
+                    <button type="button"
+                            class="relative flex rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+                            id="user-menu-button"
+                            aria-expanded="false"
+                            aria-haspopup="true">
+                      <span class="absolute -inset-1.5"></span>
+                      <span class="sr-only">Open user menu</span>
+                      <img class="size-8 rounded-full"
+                           src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                           alt="">
+                    </button>
+                  </div>
+
+                  <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 focus:outline-none"
+                       role="menu"
+                       aria-orientation="vertical"
+                       aria-labelledby="user-menu-button"
+                       tabindex="-1">
+
+                    <a href="#"
+                       class="block px-4 py-2 text-sm text-gray-700 hover:text-emerald-500"
+                       role="menuitem"
+                       tabindex="-1"
+                       id="user-menu-item-0">Perfil</a>
+
+                    <form class="block px-4 py-2 text-sm text-gray-700 hover:text-emerald-500"
+                          role="menuitem"
+                          tabindex="-1"
+                          id="user-menu-item-1"
+                          method="post"
+                          action="{% url 'logout' %}">
+                      {% csrf_token %}
+                      <button type="submit">Salir</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {% block content %}
+      {% endblock content %}
     {% endblock body %}
+
+    <script src="{% static 'app/navbar-dropdown.js' %}"></script>
+
+    {% block scripts %}
+    {% endblock scripts %}
   </body>
 </html>

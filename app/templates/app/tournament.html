@@ -5,7 +5,7 @@
   RacketRank - {{ tournament.name }}
 {% endblock title %}
 
-{% block body %}
+{% block content %}
   <div class="mx-auto max-w-7xl py-12 sm:px-6 lg:px-8">
     <div class="mx-auto max-w-4xl">
       <div class="overflow-hidden bg-white shadow sm:rounded-lg">
@@ -21,29 +21,39 @@
           {% endif %}
 
           <span class="mt-4 ms-2 max-w-2xl text-sm/6 text-gray-500">Fecha límite de inscripción: {{ tournament.inscription_end_date }} </span>
-          
+
           <div class="mt-8">
             <div class="sm:hidden">
               <label for="tabs" class="sr-only">Select a tab</label>
-              <select id="tabs" name="tabs" class="block w-full rounded-md border-gray-300 focus:border-emerald-500 focus:ring-emerald-500">
+              <select id="tabs"
+                      name="tabs"
+                      class="block w-full rounded-md border-gray-300 focus:border-emerald-500 focus:ring-emerald-500">
                 <option selected>General</option>
                 <option>Clasificación</option>
                 <option>Partidos</option>
               </select>
             </div>
             <div class="hidden sm:block">
-              <nav class="isolate flex divide-x divide-gray-200 rounded-lg shadow" aria-label="Tabs">
-                <a href="{% url 'tournament' tournament=tournament.name|lower %}" class="group relative min-w-0 flex-1 overflow-hidden rounded-l-lg bg-white px-4 py-4 text-center text-sm font-medium text-gray-900 hover:bg-gray-50 focus:z-10" aria-current="page">
+              <nav class="isolate flex divide-x divide-gray-200 rounded-lg shadow"
+                   aria-label="Tabs">
+                <a href="{% url 'tournament' tournament=tournament.name|lower %}"
+                   class="group relative min-w-0 flex-1 overflow-hidden rounded-l-lg bg-white px-4 py-4 text-center text-sm font-medium text-gray-900 hover:bg-gray-50 focus:z-10"
+                   aria-current="page">
                   <span>General</span>
-                  <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5 bg-emerald-500"></span>
+                  <span aria-hidden="true"
+                        class="absolute inset-x-0 bottom-0 h-0.5 bg-indigo-500"></span>
                 </a>
-                <a href="{% url 'clasificacion' tournament=tournament.name|lower %}" class="group relative min-w-0 flex-1 overflow-hidden bg-white px-4 py-4 text-center text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 focus:z-10">
+                <a href="{% url 'clasificacion' tournament=tournament.name|lower %}"
+                   class="group relative min-w-0 flex-1 overflow-hidden bg-white px-4 py-4 text-center text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 focus:z-10">
                   <span>Clasificación</span>
-                  <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5 bg-transparent"></span>
+                  <span aria-hidden="true"
+                        class="absolute inset-x-0 bottom-0 h-0.5 bg-transparent"></span>
                 </a>
-                <a href="{% url 'partidos' tournament=tournament.name|lower %}" class="group relative min-w-0 flex-1 overflow-hidden bg-white px-4 py-4 text-center text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 focus:z-10">
+                <a href="{% url 'partidos' tournament=tournament.name|lower %}"
+                   class="group relative min-w-0 flex-1 overflow-hidden bg-white px-4 py-4 text-center text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 focus:z-10">
                   <span>Partidos</span>
-                  <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5 bg-transparent"></span>
+                  <span aria-hidden="true"
+                        class="absolute inset-x-0 bottom-0 h-0.5 bg-transparent"></span>
                 </a>
               </nav>
             </div>
@@ -131,4 +141,4 @@
       </div>
     </div>
   </div>
-{% endblock body %}
+{% endblock content %}

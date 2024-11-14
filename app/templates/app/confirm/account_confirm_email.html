@@ -1,0 +1,6 @@
+<h1>¡Ya casi has terminado, {{ user.username }}!</h1>
+<br>
+<h2>
+    Haga clic <a href="{{ link }}">aquí</a> para confirmar su cuenta.
+</h2>
+<h2>El token caduca a las {{ expiry|time:"TIME_FORMAT" }}</h2>

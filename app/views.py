@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.views import PasswordResetView
 from django.core.management.utils import get_random_secret_key
 from django.shortcuts import redirect, render
+from django_email_verification import send_email
 
 from .forms import CustomUserCreationForm
 
@@ -18,10 +19,13 @@ def register(request):
     if request.method == "POST":
         form = CustomUserCreationForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            send_email(user)
             messages.success(
                 request,
-                "¡Cuenta creada exitosamente! Ahora puedes iniciar sesión.",
+                "Hemos enviado un correo electrónico para verificar tu cuenta.",
             )
             return redirect("login")
     else:
@@ -33,9 +37,9 @@ def register(request):
 class CustomPasswordResetView(PasswordResetView):
     """Custom password reset view."""
 
-    template_name = "app/password-reset.html"
-    subject_template_name = "app/password_reset_subject.txt"
-    email_template_name = "app/password_reset_email.html"
+    template_name = "app/reset/password-reset.html"
+    subject_template_name = "app/reset/password_reset_subject.txt"
+    email_template_name = "app/reset/password_reset_email.html"
     extra_email_context = {"new_password": get_random_secret_key()}
 
     def form_valid(self, form):

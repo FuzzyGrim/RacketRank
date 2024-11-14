@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_email_verification",
 ]
 
 MIDDLEWARE = [
@@ -139,3 +140,23 @@ EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+def email_verified_callback(user):
+    """Execute after email verification."""
+    user.is_active = True
+
+
+# Global Package Settings
+EMAIL_FROM_ADDRESS = config("EMAIL_HOST_USER")
+EMAIL_PAGE_DOMAIN = "http://localhost:8000"
+
+# Email Verification Settings (mandatory for email sending)
+EMAIL_MAIL_SUBJECT = "{{ user.username }}, cofirma tu cuenta"
+EMAIL_MAIL_HTML = "app/confirm/account_confirm_email.html"
+EMAIL_MAIL_PLAIN = "app/confirm/account_confirm_email.txt"
+EMAIL_MAIL_TOKEN_LIFE = 60 * 60  # one hour
+
+# Email Verification Settings (mandatory for builtin view)
+EMAIL_MAIL_PAGE_TEMPLATE = "app/confirm/account_confirm_success.html"
+EMAIL_MAIL_CALLBACK = email_verified_callback

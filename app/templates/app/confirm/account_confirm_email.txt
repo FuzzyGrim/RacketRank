@@ -1,0 +1,3 @@
+¡Ya casi has llegado terminado, {{ user.username }}!
+Haz clic en el siguiente enlace para confirmar tu cuenta: {{ link }}
+El token caduca el {{ expiry|time:"TIME_FORMAT" }}

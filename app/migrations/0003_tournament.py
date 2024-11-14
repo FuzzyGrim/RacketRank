@@ -19,6 +19,7 @@ class Migration(migrations.Migration):
                 ('start_date', models.DateField()),
                 ('end_date', models.DateField()),
                 ('image', models.URLField()),
+                ('description', models.TextField()),
             ],
         ),
     ]

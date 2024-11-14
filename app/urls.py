@@ -27,4 +27,10 @@ urlpatterns = [
     ),
     path("logout", auth_views.LogoutView.as_view(), name="logout"),
     path("torneo/<tournament:tournament>", views.tournament, name="tournament"),
+    path(
+        "torneo/<tournament:tournament>/clasificación",
+        views.clasificacion,
+        name="clasificacion",
+    ),
+    path("torneo/<tournament:tournament>/partidos", views.partidos, name="partidos"),
 ]

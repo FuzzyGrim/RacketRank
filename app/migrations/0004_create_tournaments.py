@@ -4,10 +4,18 @@ from django.db import migrations
 
 def forward_func(apps, schema_editor):
     Tournament = apps.get_model("app", "Tournament")
-    Tournament.objects.create(name="Primavera", inscription_end_date="2024-03-20", start_date="2024-04-01", end_date="2024-6-01", image="https://images.unsplash.com/photo-1499510318569-1a3d67dc3976?q=80&w=2196&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-    Tournament.objects.create(name="Verano", inscription_end_date="2024-06-20", start_date="2024-07-01", end_date="2024-9-01",  image="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-    Tournament.objects.create(name="Otoño", inscription_end_date="2024-09-20", start_date="2024-10-01", end_date="2024-12-01",  image="https://images.unsplash.com/photo-1644951521196-2e683819f122?q=80&w=2054&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
-    Tournament.objects.create(name="Invierno", inscription_end_date="2024-12-20", start_date="2025-01-01", end_date="2025-03-01",  image="https://images.unsplash.com/photo-1509646870971-36861b297fc2?q=80&w=2533&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+    Tournament.objects.create(name="Primavera", inscription_end_date="2024-03-20", start_date="2024-04-01", end_date="2024-6-01", 
+                              image="https://images.unsplash.com/photo-1499510318569-1a3d67dc3976?q=80&w=2196&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                              description="Comienza el año con energía en nuestro torneo más esperado. ¡Demuestra tu talento en la cancha y sé parte de la mejor competencia de la temporada!")
+    Tournament.objects.create(name="Verano", inscription_end_date="2024-06-20", start_date="2024-07-01", end_date="2024-9-01",
+                              image="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                              description="El calor sube y la competencia también. Únete al torneo de verano donde los mejores jugadores se encuentran para disputar emocionantes partidos.")
+    Tournament.objects.create(name="Otoño", inscription_end_date="2024-09-20", start_date="2024-10-01", end_date="2024-12-01",
+                              image="https://images.unsplash.com/photo-1644951521196-2e683819f122?q=80&w=2054&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                              description="La temporada dorada del tenis te espera. Participa en nuestro torneo de otoño y forma parte de una experiencia única llena de competitividad y diversión.")
+    Tournament.objects.create(name="Invierno", inscription_end_date="2024-12-20", start_date="2025-01-01", end_date="2025-03-01",
+                              image="https://images.unsplash.com/photo-1509646870971-36861b297fc2?q=80&w=2533&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                              description="Cierra el año con broche de oro en nuestro torneo invernal. Una oportunidad perfecta para demostrar tu progreso y enfrentar nuevos desafíos.")
     print("Tournaments created successfully.")
 
 def reverse_func(apps, schema_editor):

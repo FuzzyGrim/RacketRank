@@ -73,6 +73,21 @@ class CustomPasswordResetView(PasswordResetView):
 
 def tournament(request, tournament):
     """Tournament view."""
-    tournament = models.Tournament.objects.get(name=tournament)
-    context = {"tournament": tournament}
+    tournament = models.Tournament.objects.get(name=tournament.capitalize())
+    today = datetime.datetime.now(tz=settings.TZ).date()
+    context = {"tournament": tournament, "today": today}
     return render(request, "app/tournament.html", context)
+
+
+def clasificacion(request, tournament):
+    """Clasificacion view."""
+    tournament = models.Tournament.objects.get(name=tournament.capitalize())
+    context = {"tournament": tournament}
+    return render(request, "app/clasificacion.html", context)
+
+
+def partidos(request, tournament):
+    """Partidos view."""
+    tournament = models.Tournament.objects.get(name=tournament.capitalize())
+    context = {"tournament": tournament}
+    return render(request, "app/partidos.html", context)

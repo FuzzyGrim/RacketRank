@@ -4,7 +4,7 @@
 class TournamentChecker:
     """Check if the media type is valid."""
 
-    tournaments = ["Primavera", "Verano", "Otoño", "Invierno"]
+    tournaments = ["primavera", "verano", "otoño", "invierno"]
     regex = f"({'|'.join(tournaments)})"
 
     def to_python(self, value):

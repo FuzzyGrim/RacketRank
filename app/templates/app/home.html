@@ -21,19 +21,17 @@
                  src="https://images.unsplash.com/photo-1499510318569-1a3d67dc3976?q=80&w=2196&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                  alt="">
 
-            <a href="{% url 'tournament' tournament=primavera.name %}">
+            <a href="{% url 'tournament' tournament=primavera.name|lower %}">
               <div class="p-10 pt-4">
                 {% if today > primavera.end_date %}
                   <h3 class="text-sm/4 font-semibold text-red-600">Finalizado</h3>
                 {% elif today < primavera.inscription_end_date %}
-                  <h3 class="text-sm/4 font-semibold text-sky-600">Inscripciones abiertas</h3>
+                  <h3 class="text-sm/4 font-semibold text-sky-600">Inscripciones Abiertas</h3>
                 {% else %}
-                  <h3 class="text-sm/4 font-semibold text-emerald-600">Activo</h3>
+                  <h3 class="text-sm/4 font-semibold text-emerald-600">En Progreso</h3>
                 {% endif %}
                 <p class="mt-2 text-lg font-medium tracking-tight text-gray-950">{{ primavera.name }}</p>
-                <p class="mt-2 max-w-lg text-sm/6 text-gray-600">
-                  Comienza el año con energía en nuestro torneo más esperado. ¡Demuestra tu talento en la cancha y sé parte de la mejor competencia de la temporada!
-                </p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-600">{{ primavera.description }}</p>
               </div>
             </a>
           </div>
@@ -48,19 +46,17 @@
                  src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                  alt="">
 
-            <a href="{% url 'tournament' tournament=verano.name %}">
+            <a href="{% url 'tournament' tournament=verano.name|lower %}">
               <div class="p-10 pt-4">
                 {% if today > verano.end_date %}
                   <h3 class="text-sm/4 font-semibold text-red-600">Finalizado</h3>
                 {% elif today < verano.inscription_end_date %}
-                  <h3 class="text-sm/4 font-semibold text-sky-600">Inscripciones abiertas</h3>
+                  <h3 class="text-sm/4 font-semibold text-sky-600">Inscripciones Abiertas</h3>
                 {% else %}
-                  <h3 class="text-sm/4 font-semibold text-emerald-600">Activo</h3>
+                  <h3 class="text-sm/4 font-semibold text-emerald-600">En Progreso</h3>
                 {% endif %}
                 <p class="mt-2 text-lg font-medium tracking-tight text-gray-950">{{ verano.name }}</p>
-                <p class="mt-2 max-w-lg text-sm/6 text-gray-600">
-                  El calor sube y la competencia también. Únete al torneo de verano donde los mejores jugadores se encuentran para disputar emocionantes partidos.
-                </p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-600">{{ verano.description }}</p>
               </div>
             </a>
           </div>
@@ -74,17 +70,17 @@
                  src="https://images.unsplash.com/photo-1644951521196-2e683819f122?q=80&w=2054&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                  alt="">
 
-            <a href="{% url 'tournament' tournament=otono.name %}">
+            <a href="{% url 'tournament' tournament=otono.name|lower %}">
               <div class="p-10 pt-4">
                 {% if today > otono.end_date %}
                   <h3 class="text-sm/4 font-semibold text-red-600">Finalizado</h3>
                 {% elif today < otono.inscription_end_date %}
-                  <h3 class="text-sm/4 font-semibold text-sky-600">Inscripciones abiertas</h3>
+                  <h3 class="text-sm/4 font-semibold text-sky-600">Inscripciones Abiertas</h3>
                 {% else %}
-                  <h3 class="text-sm/4 font-semibold text-emerald-600">Activo</h3>
+                  <h3 class="text-sm/4 font-semibold text-emerald-600">En Progreso</h3>
                 {% endif %}
                 <p class="mt-2 text-lg font-medium tracking-tight text-gray-950">{{ otono.name }}</p>
-                <p class="mt-2 max-w-lg text-sm/6 text-gray-600">La temporada dorada del tenis te espera. Participa en nuestro torneo de otoño y forma parte de una experiencia única llena de competitividad y diversión.</p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-600">{{ otono.description }}</p>
               </div>
             </a>
           </div>
@@ -98,19 +94,17 @@
                  src="https://images.unsplash.com/photo-1509646870971-36861b297fc2?q=80&w=2533&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                  alt="">
 
-            <a href="{% url 'tournament' tournament=invierno.name %}">
+            <a href="{% url 'tournament' tournament=invierno.name|lower %}">
               <div class="p-10 pt-4">
                 {% if today > invierno.end_date %}
                   <h3 class="text-sm/4 font-semibold text-red-600">Finalizado</h3>
                 {% elif today < invierno.inscription_end_date %}
-                  <h3 class="text-sm/4 font-semibold text-sky-600">Inscripciones abiertas</h3>
+                  <h3 class="text-sm/4 font-semibold text-sky-600">Inscripciones Abiertas</h3>
                 {% else %}
-                  <h3 class="text-sm/4 font-semibold text-emerald-600">Activo</h3>
+                  <h3 class="text-sm/4 font-semibold text-emerald-600">En Progreso</h3>
                 {% endif %}
                 <p class="mt-2 text-lg font-medium tracking-tight text-gray-950">{{ invierno.name }}</p>
-                <p class="mt-2 max-w-lg text-sm/6 text-gray-600">
-                  Cierra el año con broche de oro en nuestro torneo invernal. Una oportunidad perfecta para demostrar tu progreso y enfrentar nuevos desafíos.
-                </p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-600">{{ invierno.description }}</p>
               </div>
             </a>
           </div>

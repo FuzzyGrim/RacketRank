@@ -17,6 +17,7 @@ class Tournament(models.Model):
     start_date = models.DateField()
     end_date = models.DateField()
     image = models.URLField()
+    description = models.TextField()
 
     def __str__(self):
         """Return name."""

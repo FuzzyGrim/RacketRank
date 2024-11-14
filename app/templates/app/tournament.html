@@ -6,5 +6,129 @@
 {% endblock title %}
 
 {% block body %}
-  {{ tournament }}
+  <div class="mx-auto max-w-7xl py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl">
+      <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+        <div class="px-4 py-6 sm:px-6">
+          <h1 class="text-2xl/7 font-semibold text-gray-900">Torneo de {{ tournament.name }}</h1>
+
+          {% if today > tournament.end_date %}
+            <span class="mt-4 inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">Finalizado</span>
+          {% elif today < tournament.inscription_end_date %}
+            <span class="mt-4 inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">Inscripciones Abiertas</span>
+          {% else %}
+            <span class="mt-4 inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">En Progreso</span>
+          {% endif %}
+
+          <span class="mt-4 ms-2 max-w-2xl text-sm/6 text-gray-500">Fecha límite de inscripción: {{ tournament.inscription_end_date }} </span>
+          
+          <div class="mt-8">
+            <div class="sm:hidden">
+              <label for="tabs" class="sr-only">Select a tab</label>
+              <select id="tabs" name="tabs" class="block w-full rounded-md border-gray-300 focus:border-emerald-500 focus:ring-emerald-500">
+                <option selected>General</option>
+                <option>Clasificación</option>
+                <option>Partidos</option>
+              </select>
+            </div>
+            <div class="hidden sm:block">
+              <nav class="isolate flex divide-x divide-gray-200 rounded-lg shadow" aria-label="Tabs">
+                <a href="{% url 'tournament' tournament=tournament.name|lower %}" class="group relative min-w-0 flex-1 overflow-hidden rounded-l-lg bg-white px-4 py-4 text-center text-sm font-medium text-gray-900 hover:bg-gray-50 focus:z-10" aria-current="page">
+                  <span>General</span>
+                  <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5 bg-emerald-500"></span>
+                </a>
+                <a href="{% url 'clasificacion' tournament=tournament.name|lower %}" class="group relative min-w-0 flex-1 overflow-hidden bg-white px-4 py-4 text-center text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 focus:z-10">
+                  <span>Clasificación</span>
+                  <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5 bg-transparent"></span>
+                </a>
+                <a href="{% url 'partidos' tournament=tournament.name|lower %}" class="group relative min-w-0 flex-1 overflow-hidden bg-white px-4 py-4 text-center text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 focus:z-10">
+                  <span>Partidos</span>
+                  <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5 bg-transparent"></span>
+                </a>
+              </nav>
+            </div>
+          </div>
+
+        </div>
+        <div class="border-t border-gray-100">
+          <dl class="divide-y divide-gray-100">
+
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-semibold text-gray-900">
+                <div class="flex items-center gap-2">
+                  <svg class="w-5 h-5 text-gray-500"
+                       fill="none"
+                       stroke="currentColor"
+                       viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                    </path>
+                  </svg>
+
+                  <div>Descripción</div>
+                </div>
+              </dt>
+              <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                {{ tournament.description }}
+              </dd>
+            </div>
+
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-semibold text-gray-900">
+                <div class="flex items-center gap-2">
+                  <svg class="w-5 h-5 text-gray-500"
+                       fill="none"
+                       stroke="currentColor"
+                       viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                    </path>
+                  </svg>
+                  <div>Fecha de comienzo</div>
+                </div>
+              </dt>
+              <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                {{ tournament.start_date }}
+              </dd>
+            </div>
+
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-semibold text-gray-900">
+                <div class="flex items-center gap-2">
+                  <svg class="w-5 h-5 text-gray-500"
+                       fill="none"
+                       stroke="currentColor"
+                       viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+                    </path>
+                  </svg>
+                  <div>Fecha de finalización</div>
+                </div>
+              </dt>
+              <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                {{ tournament.end_date }}
+              </dd>
+            </div>
+
+            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+              <dt class="text-sm font-semibold text-gray-900">
+                <div class="flex items-center gap-2">
+                  <svg class="w-5 h-5 text-gray-500"
+                       fill="none"
+                       stroke="currentColor"
+                       viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                    </path>
+                  </svg>
+                  <div>Jugadores Inscritos</div>
+                </div>
+              </dt>
+              <dd class="mt-1 text-sm/6 text-gray-700 sm:col-span-2 sm:mt-0">
+                12/16
+              </dd>
+            </div>
+
+          </dl>
+        </div>
+      </div>
+    </div>
+  </div>
 {% endblock body %}

@@ -6,61 +6,119 @@
 {% endblock title %}
 
 {% block body %}
-<div class="bg-white py-24 sm:py-32">
-  <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
-    <h2 class="text-base/7 font-semibold text-emerald-600">Participa</h2>
-    <p class="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">Torneos del año</p>
-    <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
-      <div class="relative lg:col-span-3">
-        <div class="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]"></div>
-        <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)]">
-          <img class="h-80 object-cover object-left" src="https://images.unsplash.com/photo-1499510318569-1a3d67dc3976?q=80&w=2196&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
-          <div class="p-10 pt-4">
-            <h3 class="text-sm/4 font-semibold text-red-600">Finalizado</h3>
-            <p class="mt-2 text-lg font-medium tracking-tight text-gray-950">Primavera</p>
-            <p class="mt-2 max-w-lg text-sm/6 text-gray-600">Lorem ipsum dolor sit amet, consectetur adipiscing elit. In gravida justo et nulla efficitur, maximus egestas sem pellentesque.</p>
+  <div class="bg-white py-14">
+    <div class="mx-auto max-w-2xl px-6 lg:max-w-7xl lg:px-8">
+      <h2 class="text-base/7 font-semibold text-emerald-600">Participa</h2>
+      <p class="mt-2 max-w-lg text-pretty text-4xl font-semibold tracking-tight text-gray-950 sm:text-5xl">
+        Torneos del año
+      </p>
+      <div class="mt-10 grid grid-cols-1 gap-4 sm:mt-16 lg:grid-cols-6 lg:grid-rows-2">
+
+        <div class="relative lg:col-span-3">
+          <div class="absolute inset-px rounded-lg bg-white max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]"></div>
+          <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-t-[calc(2rem+1px)] lg:rounded-tl-[calc(2rem+1px)]">
+            <img class="h-80 object-cover object-left"
+                 src="https://images.unsplash.com/photo-1499510318569-1a3d67dc3976?q=80&w=2196&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                 alt="">
+
+            <a href="{% url 'tournament' tournament=primavera.name %}">
+              <div class="p-10 pt-4">
+                {% if today > primavera.end_date %}
+                  <h3 class="text-sm/4 font-semibold text-red-600">Finalizado</h3>
+                {% elif today < primavera.inscription_end_date %}
+                  <h3 class="text-sm/4 font-semibold text-sky-600">Inscripciones abiertas</h3>
+                {% else %}
+                  <h3 class="text-sm/4 font-semibold text-emerald-600">Activo</h3>
+                {% endif %}
+                <p class="mt-2 text-lg font-medium tracking-tight text-gray-950">{{ primavera.name }}</p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-600">
+                  Comienza el año con energía en nuestro torneo más esperado. ¡Demuestra tu talento en la cancha y sé parte de la mejor competencia de la temporada!
+                </p>
+              </div>
+            </a>
+          </div>
+          <div class="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]">
           </div>
         </div>
-        <div class="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-t-[2rem] lg:rounded-tl-[2rem]"></div>
-      </div>
-      <div class="relative lg:col-span-3">
-        <div class="absolute inset-px rounded-lg bg-white lg:rounded-tr-[2rem]"></div>
-        <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]">
-          <img class="h-80 object-cover object-left lg:object-right" src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
-          <div class="p-10 pt-4">
-            <h3 class="text-sm/4 font-semibold text-red-600">Finalizado</h3>
-            <p class="mt-2 text-lg font-medium tracking-tight text-gray-950">Verano</p>
-            <p class="mt-2 max-w-lg text-sm/6 text-gray-600">Curabitur auctor, ex quis auctor venenatis, eros arcu rhoncus massa, laoreet dapibus ex elit vitae odio.</p>
+
+        <div class="relative lg:col-span-3">
+          <div class="absolute inset-px rounded-lg bg-white lg:rounded-tr-[2rem]"></div>
+          <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-tr-[calc(2rem+1px)]">
+            <img class="h-80 object-cover object-left lg:object-right"
+                 src="https://images.unsplash.com/photo-1554068865-24cecd4e34b8?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                 alt="">
+
+            <a href="{% url 'tournament' tournament=verano.name %}">
+              <div class="p-10 pt-4">
+                {% if today > verano.end_date %}
+                  <h3 class="text-sm/4 font-semibold text-red-600">Finalizado</h3>
+                {% elif today < verano.inscription_end_date %}
+                  <h3 class="text-sm/4 font-semibold text-sky-600">Inscripciones abiertas</h3>
+                {% else %}
+                  <h3 class="text-sm/4 font-semibold text-emerald-600">Activo</h3>
+                {% endif %}
+                <p class="mt-2 text-lg font-medium tracking-tight text-gray-950">{{ verano.name }}</p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-600">
+                  El calor sube y la competencia también. Únete al torneo de verano donde los mejores jugadores se encuentran para disputar emocionantes partidos.
+                </p>
+              </div>
+            </a>
+          </div>
+          <div class="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-tr-[2rem]"></div>
+        </div>
+
+        <div class="relative lg:col-span-3">
+          <div class="absolute inset-px rounded-lg bg-white lg:rounded-bl-[2rem]"></div>
+          <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-bl-[calc(2rem+1px)]">
+            <img class="h-80 object-cover object-left"
+                 src="https://images.unsplash.com/photo-1644951521196-2e683819f122?q=80&w=2054&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                 alt="">
+
+            <a href="{% url 'tournament' tournament=otono.name %}">
+              <div class="p-10 pt-4">
+                {% if today > otono.end_date %}
+                  <h3 class="text-sm/4 font-semibold text-red-600">Finalizado</h3>
+                {% elif today < otono.inscription_end_date %}
+                  <h3 class="text-sm/4 font-semibold text-sky-600">Inscripciones abiertas</h3>
+                {% else %}
+                  <h3 class="text-sm/4 font-semibold text-emerald-600">Activo</h3>
+                {% endif %}
+                <p class="mt-2 text-lg font-medium tracking-tight text-gray-950">{{ otono.name }}</p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-600">La temporada dorada del tenis te espera. Participa en nuestro torneo de otoño y forma parte de una experiencia única llena de competitividad y diversión.</p>
+              </div>
+            </a>
+          </div>
+          <div class="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-bl-[2rem]"></div>
+        </div>
+
+        <div class="relative lg:col-span-3">
+          <div class="absolute inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]"></div>
+          <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-br-[calc(2rem+1px)]">
+            <img class="h-80 object-cover object-center"
+                 src="https://images.unsplash.com/photo-1509646870971-36861b297fc2?q=80&w=2533&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                 alt="">
+
+            <a href="{% url 'tournament' tournament=invierno.name %}">
+              <div class="p-10 pt-4">
+                {% if today > invierno.end_date %}
+                  <h3 class="text-sm/4 font-semibold text-red-600">Finalizado</h3>
+                {% elif today < invierno.inscription_end_date %}
+                  <h3 class="text-sm/4 font-semibold text-sky-600">Inscripciones abiertas</h3>
+                {% else %}
+                  <h3 class="text-sm/4 font-semibold text-emerald-600">Activo</h3>
+                {% endif %}
+                <p class="mt-2 text-lg font-medium tracking-tight text-gray-950">{{ invierno.name }}</p>
+                <p class="mt-2 max-w-lg text-sm/6 text-gray-600">
+                  Cierra el año con broche de oro en nuestro torneo invernal. Una oportunidad perfecta para demostrar tu progreso y enfrentar nuevos desafíos.
+                </p>
+              </div>
+            </a>
+          </div>
+          <div class="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]">
           </div>
         </div>
-        <div class="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-tr-[2rem]"></div>
-      </div>
-      <div class="relative lg:col-span-3">
-        <div class="absolute inset-px rounded-lg bg-white lg:rounded-bl-[2rem]"></div>
-        <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] lg:rounded-bl-[calc(2rem+1px)]">
-          <img class="h-80 object-cover object-left" src="https://images.unsplash.com/photo-1644951521196-2e683819f122?q=80&w=2054&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
-          <div class="p-10 pt-4">
-            <h3 class="text-sm/4 font-semibold text-emerald-600">Activo</h3>
-            <p class="mt-2 text-lg font-medium tracking-tight text-gray-950">Otoño</p>
-            <p class="mt-2 max-w-lg text-sm/6 text-gray-600">Sed congue eros non finibus molestie. Vestibulum euismod augue.</p>
-          </div>
-        </div>
-        <div class="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 lg:rounded-bl-[2rem]"></div>
-      </div>
-      <div class="relative lg:col-span-3">
-        <div class="absolute inset-px rounded-lg bg-white max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]"></div>
-        <div class="relative flex h-full flex-col overflow-hidden rounded-[calc(theme(borderRadius.lg)+1px)] max-lg:rounded-b-[calc(2rem+1px)] lg:rounded-br-[calc(2rem+1px)]">
-          <img class="h-80 object-cover object-center" src="https://images.unsplash.com/photo-1509646870971-36861b297fc2?q=80&w=2533&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
-          <div class="p-10 pt-4">
-            <h3 class="text-sm/4 font-semibold text-sky-600">Inscripciones abiertas</h3>
-            <p class="mt-2 text-lg font-medium tracking-tight text-gray-950">Invierno</p>
-            <p class="mt-2 max-w-lg text-sm/6 text-gray-600">Aenean vulputate justo commodo auctor vehicula in malesuada semper.</p>
-          </div>
-        </div>
-        <div class="pointer-events-none absolute inset-px rounded-lg shadow ring-1 ring-black/5 max-lg:rounded-b-[2rem] lg:rounded-br-[2rem]"></div>
       </div>
     </div>
   </div>
-</div>
 
 {% endblock body %}

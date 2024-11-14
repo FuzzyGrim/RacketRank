@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
+import zoneinfo
 from pathlib import Path
 
 from decouple import config
@@ -118,6 +119,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+TZ = zoneinfo.ZoneInfo(TIME_ZONE)
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/

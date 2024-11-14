@@ -1,7 +1,9 @@
 from django.contrib.auth import views as auth_views
-from django.urls import path
+from django.urls import path, register_converter
 
-from . import views
+from app import converters, views
+
+register_converter(converters.TournamentChecker, "tournament")
 
 urlpatterns = [
     path("", views.home, name="home"),
@@ -24,4 +26,5 @@ urlpatterns = [
         name="password_reset_done",
     ),
     path("logout", auth_views.LogoutView.as_view(), name="logout"),
+    path("torneo/<tournament:tournament>", views.tournament, name="tournament"),
 ]

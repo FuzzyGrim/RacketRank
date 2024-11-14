@@ -1,0 +1,10 @@
+{% extends "app/base.html" %}
+{% load static %}
+
+{% block title %}
+  RacketRank - {{ tournament.name }}
+{% endblock title %}
+
+{% block body %}
+  {{ tournament }}
+{% endblock body %}

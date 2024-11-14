@@ -1,3 +1,6 @@
+import datetime
+
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.views import PasswordResetView
@@ -5,12 +8,24 @@ from django.core.management.utils import get_random_secret_key
 from django.shortcuts import redirect, render
 from django_email_verification import send_email
 
-from .forms import CustomUserCreationForm
+from app import models
+from app.forms import CustomUserCreationForm
 
 
 def home(request):
     """Home view."""
-    context = {}
+    primavera = models.Tournament.objects.get(name="Primavera")
+    verano = models.Tournament.objects.get(name="Verano")
+    otono = models.Tournament.objects.get(name="Otoño")
+    invierno = models.Tournament.objects.get(name="Invierno")
+    today = datetime.datetime.now(tz=settings.TZ).date()
+    context = {
+        "today": today,
+        "primavera": primavera,
+        "verano": verano,
+        "otono": otono,
+        "invierno": invierno,
+    }
     return render(request, "app/home.html", context)
 
 
@@ -54,3 +69,10 @@ class CustomPasswordResetView(PasswordResetView):
             user.save()
 
         return super().form_valid(form)
+
+
+def tournament(request, tournament):
+    """Tournament view."""
+    tournament = models.Tournament.objects.get(name=tournament)
+    context = {"tournament": tournament}
+    return render(request, "app/tournament.html", context)

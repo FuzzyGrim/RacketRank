@@ -41,7 +41,7 @@ class CustomPasswordResetView(PasswordResetView):
     def form_valid(self, form):
         """Override form_valid to set random password instead of sending reset link."""
         email = form.cleaned_data["email"]
-        user = get_user_model().objects.get(email=email)
+        user = get_user_model().objects.filter(email=email).first()
 
         if user:
             # Generate and set new password

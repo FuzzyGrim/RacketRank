@@ -275,7 +275,7 @@
     "model": "app.user",
     "pk": 18,
     "fields": {
-      "password": "test",
+      "password": "pbkdf2_sha256$870000$zYvLp6JZl01VZt6bYeY6Xk$E85T7bkNCCHkFFhUhdxuhq2lq94GSvGafpnyovYZVPU=",
       "last_login": null,
       "is_superuser": false,
       "username": "test",
@@ -284,7 +284,7 @@
       "email": "test@ejemplo.com",
       "is_staff": false,
       "is_active": true,
-      "date_joined": "2024-11-15T21:59:58.279Z",
+      "date_joined": "2024-11-15T22:15:27.622Z",
       "telefono": "+34666666661",
       "groups": [],
       "user_permissions": []

@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import get_user_model
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordResetView
 from django.core.management.utils import get_random_secret_key
 from django.shortcuts import redirect, render
@@ -9,6 +10,7 @@ from app import models
 from app.forms import CustomUserCreationForm
 
 
+@login_required
 def home(request):
     """Home view."""
     primavera = models.Tournament.objects.get(name="Primavera")
@@ -66,13 +68,23 @@ class CustomPasswordResetView(PasswordResetView):
         return super().form_valid(form)
 
 
+@login_required
 def tournament(request, tournament):
     """Tournament view."""
     tournament = models.Tournament.objects.get(name=tournament.capitalize())
-    context = {"tournament": tournament}
+
+    if "inscribir" in request.POST:
+        tournament.registered.add(request.user)
+    elif "desinscribir" in request.POST:
+        tournament.registered.remove(request.user)
+
+    user_registered = tournament.registered.filter(id=request.user.id).exists()
+
+    context = {"tournament": tournament, "user_registered": user_registered}
     return render(request, "app/tournament.html", context)
 
 
+@login_required
 def clasificacion(request, tournament):
     """Clasificacion view."""
     tournament = models.Tournament.objects.get(name=tournament.capitalize())
@@ -80,6 +92,7 @@ def clasificacion(request, tournament):
     return render(request, "app/clasificacion.html", context)
 
 
+@login_required
 def partidos(request, tournament):
     """Partidos view."""
     tournament = models.Tournament.objects.get(name=tournament.capitalize())

@@ -22,6 +22,9 @@ class Tournament(models.Model):
     image = models.URLField()
     description = models.TextField()
 
+    registered = models.ManyToManyField(User, related_name="registered")
+    players = models.ManyToManyField(User, related_name="players")
+
     def __str__(self):
         """Return name."""
         return self.name

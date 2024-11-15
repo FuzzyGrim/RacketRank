@@ -936,6 +936,11 @@ select {
   height: 2rem;
 }
 
+.size-6 {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
 .h-0\.5 {
   height: 0.125rem;
 }

@@ -12,13 +12,7 @@
         <div class="px-4 py-6 sm:px-6">
           <h1 class="text-2xl/7 font-semibold text-gray-900">Torneo de {{ tournament.name }}</h1>
 
-          {% if today > tournament.end_date %}
-            <span class="mt-4 inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">Finalizado</span>
-          {% elif today < tournament.inscription_end_date %}
-            <span class="mt-4 inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-700/10">Inscripciones Abiertas</span>
-          {% else %}
-            <span class="mt-4 inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">En Progreso</span>
-          {% endif %}
+          <span class="mt-4 inline-flex items-center rounded-md bg-{{ tournament.status_color }}-50 px-2 py-1 text-xs font-medium text-{{ tournament.status_color }}-700 ring-1 ring-inset ring-{{ tournament.status_color }}-600/20">{{ tournament.status }}</span>
 
           <span class="mt-4 ms-2 max-w-2xl text-sm/6 text-gray-500">Fecha límite de inscripción: {{ tournament.inscription_end_date }} </span>
 
@@ -102,10 +96,14 @@
             <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
               <dt class="text-sm font-semibold text-gray-900">
                 <div class="flex items-center gap-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="w-5 h-5 text-gray-500">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                       fill="none"
+                       viewBox="0 0 24 24"
+                       stroke="currentColor"
+                       class="w-5 h-5 text-gray-500">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5m-9-6h.008v.008H12v-.008ZM12 15h.008v.008H12V15Zm0 2.25h.008v.008H12v-.008ZM9.75 15h.008v.008H9.75V15Zm0 2.25h.008v.008H9.75v-.008ZM7.5 15h.008v.008H7.5V15Zm0 2.25h.008v.008H7.5v-.008Zm6.75-4.5h.008v.008h-.008v-.008Zm0 2.25h.008v.008h-.008V15Zm0 2.25h.008v.008h-.008v-.008Zm2.25-4.5h.008v.008H16.5v-.008Zm0 2.25h.008v.008H16.5V15Z" />
                   </svg>
-                  
+
                   <div>Fecha de finalización</div>
                 </div>
               </dt>

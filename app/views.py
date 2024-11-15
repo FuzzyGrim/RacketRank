@@ -1,6 +1,3 @@
-import datetime
-
-from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.views import PasswordResetView
@@ -18,9 +15,7 @@ def home(request):
     verano = models.Tournament.objects.get(name="Verano")
     otono = models.Tournament.objects.get(name="Otoño")
     invierno = models.Tournament.objects.get(name="Invierno")
-    today = datetime.datetime.now(tz=settings.TZ).date()
     context = {
-        "today": today,
         "primavera": primavera,
         "verano": verano,
         "otono": otono,
@@ -74,8 +69,7 @@ class CustomPasswordResetView(PasswordResetView):
 def tournament(request, tournament):
     """Tournament view."""
     tournament = models.Tournament.objects.get(name=tournament.capitalize())
-    today = datetime.datetime.now(tz=settings.TZ).date()
-    context = {"tournament": tournament, "today": today}
+    context = {"tournament": tournament}
     return render(request, "app/tournament.html", context)
 
 

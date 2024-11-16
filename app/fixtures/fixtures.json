@@ -301,7 +301,7 @@
       "image": "https://images.unsplash.com/photo-1644951521196-2e683819f122?q=80&w=2054&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "description": "La temporada dorada del tenis te espera. Participa en nuestro torneo de otoño y forma parte de una experiencia única llena de competitividad y diversión.",
       "current_round": "octavos",
-      "registered": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+      "registered": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 18]
     }
   },
   {
@@ -377,11 +377,433 @@
   {
     "model": "app.participant",
     "pk": 15,
-    "fields": { "user": 16, "tournament": 3, "score": 0 }
+    "fields": { "user": 18, "tournament": 3, "score": 0 }
   },
   {
-    "model": "app.participant",
+    "model": "app.match",
+    "pk": 1,
+    "fields": {
+      "tournament": 3,
+      "participant1": 1,
+      "participant2": 2,
+      "date": "2024-11-16T15:16:03.302Z",
+      "round": "octavos"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 2,
+    "fields": {
+      "tournament": 3,
+      "participant1": 3,
+      "participant2": 4,
+      "date": "2024-11-16T15:16:03.306Z",
+      "round": "octavos"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 3,
+    "fields": {
+      "tournament": 3,
+      "participant1": 5,
+      "participant2": 6,
+      "date": "2024-11-16T15:16:03.309Z",
+      "round": "octavos"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 4,
+    "fields": {
+      "tournament": 3,
+      "participant1": 7,
+      "participant2": 8,
+      "date": "2024-11-16T15:16:03.313Z",
+      "round": "octavos"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 5,
+    "fields": {
+      "tournament": 3,
+      "participant1": 9,
+      "participant2": 10,
+      "date": "2024-11-16T15:16:03.317Z",
+      "round": "octavos"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 6,
+    "fields": {
+      "tournament": 3,
+      "participant1": 11,
+      "participant2": 12,
+      "date": "2024-11-16T15:16:03.320Z",
+      "round": "octavos"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 7,
+    "fields": {
+      "tournament": 3,
+      "participant1": 13,
+      "participant2": 14,
+      "date": "2024-11-16T15:16:03.323Z",
+      "round": "octavos"
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 1,
+    "fields": {
+      "set_number": 1,
+      "match": 1,
+      "participant1_score": 6,
+      "participant2_score": 4
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 2,
+    "fields": {
+      "set_number": 2,
+      "match": 1,
+      "participant1_score": 6,
+      "participant2_score": 3
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 3,
+    "fields": {
+      "set_number": 3,
+      "match": 1,
+      "participant1_score": 6,
+      "participant2_score": 2
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 4,
+    "fields": {
+      "set_number": 4,
+      "match": 1,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 5,
+    "fields": {
+      "set_number": 5,
+      "match": 1,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 6,
+    "fields": {
+      "set_number": 1,
+      "match": 2,
+      "participant1_score": 4,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 7,
+    "fields": {
+      "set_number": 2,
+      "match": 2,
+      "participant1_score": 5,
+      "participant2_score": 7
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 8,
+    "fields": {
+      "set_number": 3,
+      "match": 2,
+      "participant1_score": 6,
+      "participant2_score": 4
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 9,
+    "fields": {
+      "set_number": 4,
+      "match": 2,
+      "participant1_score": 6,
+      "participant2_score": 0
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 10,
+    "fields": {
+      "set_number": 5,
+      "match": 2,
+      "participant1_score": 6,
+      "participant2_score": 3
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 11,
+    "fields": {
+      "set_number": 1,
+      "match": 3,
+      "participant1_score": 6,
+      "participant2_score": 1
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 12,
+    "fields": {
+      "set_number": 2,
+      "match": 3,
+      "participant1_score": 6,
+      "participant2_score": 1
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 13,
+    "fields": {
+      "set_number": 3,
+      "match": 3,
+      "participant1_score": 6,
+      "participant2_score": 1
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 14,
+    "fields": {
+      "set_number": 4,
+      "match": 3,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 15,
+    "fields": {
+      "set_number": 5,
+      "match": 3,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
     "pk": 16,
-    "fields": { "user": 18, "tournament": 3, "score": 0 }
+    "fields": {
+      "set_number": 1,
+      "match": 4,
+      "participant1_score": 4,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 17,
+    "fields": {
+      "set_number": 2,
+      "match": 4,
+      "participant1_score": 6,
+      "participant2_score": 3
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 18,
+    "fields": {
+      "set_number": 3,
+      "match": 4,
+      "participant1_score": 6,
+      "participant2_score": 2
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 19,
+    "fields": {
+      "set_number": 4,
+      "match": 4,
+      "participant1_score": 6,
+      "participant2_score": 1
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 20,
+    "fields": {
+      "set_number": 5,
+      "match": 4,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 21,
+    "fields": {
+      "set_number": 1,
+      "match": 5,
+      "participant1_score": 6,
+      "participant2_score": 4
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 22,
+    "fields": {
+      "set_number": 2,
+      "match": 5,
+      "participant1_score": 6,
+      "participant2_score": 4
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 23,
+    "fields": {
+      "set_number": 3,
+      "match": 5,
+      "participant1_score": 6,
+      "participant2_score": 4
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 24,
+    "fields": {
+      "set_number": 4,
+      "match": 5,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 25,
+    "fields": {
+      "set_number": 5,
+      "match": 5,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 26,
+    "fields": {
+      "set_number": 1,
+      "match": 6,
+      "participant1_score": 4,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 27,
+    "fields": {
+      "set_number": 2,
+      "match": 6,
+      "participant1_score": 6,
+      "participant2_score": 4
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 28,
+    "fields": {
+      "set_number": 3,
+      "match": 6,
+      "participant1_score": 6,
+      "participant2_score": 4
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 29,
+    "fields": {
+      "set_number": 4,
+      "match": 6,
+      "participant1_score": 2,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 30,
+    "fields": {
+      "set_number": 5,
+      "match": 6,
+      "participant1_score": 2,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 31,
+    "fields": {
+      "set_number": 1,
+      "match": 7,
+      "participant1_score": 4,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 32,
+    "fields": {
+      "set_number": 2,
+      "match": 7,
+      "participant1_score": 6,
+      "participant2_score": 0
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 33,
+    "fields": {
+      "set_number": 3,
+      "match": 7,
+      "participant1_score": 4,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 34,
+    "fields": {
+      "set_number": 4,
+      "match": 7,
+      "participant1_score": 6,
+      "participant2_score": 0
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 35,
+    "fields": {
+      "set_number": 5,
+      "match": 7,
+      "participant1_score": 4,
+      "participant2_score": 6
+    }
   }
 ]

@@ -90,6 +90,13 @@ class Tournament(models.Model):
             "final": "Final",
         }[self.next_round]
 
+    @property
+    def round_finished(self):
+        """Return if the current round is finished."""
+        # check if all games have winners
+        matches = self.match_set.filter(round=self.current_round)
+        return all(match.winner for match in matches)
+
     def generate_matches(self):
         """Generate matches for the current round."""
         participants = list(self.participant_set.all())

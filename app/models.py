@@ -23,7 +23,7 @@ class Tournament(models.Model):
     description = models.TextField()
 
     registered = models.ManyToManyField(User, related_name="registered")
-    players = models.ManyToManyField(User, related_name="players")
+    participants = models.ManyToManyField(User, through="Participant")
 
     def __str__(self):
         """Return name."""
@@ -51,3 +51,15 @@ class Tournament(models.Model):
         if self.status == "En curso":
             return "blue"
         return "red"
+
+
+class Participant(models.Model):
+    """Participant model."""
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
+    score = models.IntegerField(default=0)
+
+    def __str__(self):
+        """Return user."""
+        return self.user.username

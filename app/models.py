@@ -1,5 +1,6 @@
 import datetime
 import logging
+from random import shuffle
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
@@ -99,7 +100,18 @@ class Tournament(models.Model):
 
     def generate_matches(self):
         """Generate matches for the current round."""
-        participants = list(self.participant_set.all())
+        # get shuffled participants that havent lost
+        matches = self.match_set.filter(round=self.current_round)
+        participants = list(
+            self.participant_set.exclude(
+                user__in=[match.loser.user for match in matches if match.loser],
+            ),
+        )
+        shuffle(participants)
+
+        # update round
+        self.current_round = self.next_round
+        self.save()
 
         if not participants:
             logger.info("No hay participantes")
@@ -178,6 +190,15 @@ class Match(models.Model):
             return self.participant1
         if self.participant1_wins < self.participant2_wins:
             return self.participant2
+        return None
+
+    @property
+    def loser(self):
+        """Return loser."""
+        if self.participant1_wins > self.participant2_wins:
+            return self.participant2
+        if self.participant1_wins < self.participant2_wins:
+            return self.participant1
         return None
 
 

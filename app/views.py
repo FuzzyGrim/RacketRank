@@ -172,6 +172,8 @@ def match(request, tournament, match_id):
         widgets={
             "match": forms.HiddenInput(),
             "set_number": forms.TextInput(attrs={"readonly": True, "hidden": True}),
+            "participant1_score": forms.NumberInput(attrs={"required": False}),
+            "participant2_score": forms.NumberInput(attrs={"required": False}),
         },
     )
 

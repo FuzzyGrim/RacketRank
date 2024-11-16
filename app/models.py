@@ -176,7 +176,9 @@ class Match(models.Model):
         """Return winner."""
         if self.participant1_wins > self.participant2_wins:
             return self.participant1
-        return self.participant2
+        if self.participant1_wins < self.participant2_wins:
+            return self.participant2
+        return None
 
 
 class Set(models.Model):
@@ -184,8 +186,8 @@ class Set(models.Model):
 
     set_number = models.IntegerField()
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
-    participant1_score = models.IntegerField()
-    participant2_score = models.IntegerField()
+    participant1_score = models.IntegerField(null=True, blank=True)
+    participant2_score = models.IntegerField(null=True, blank=True)
 
     class Meta:
         """Meta class."""
@@ -201,4 +203,6 @@ class Set(models.Model):
         """Return winner."""
         if self.participant1_score > self.participant2_score:
             return self.match.participant1
-        return self.match.participant2
+        if self.participant1_score < self.participant2_score:
+            return self.match.participant2
+        return None

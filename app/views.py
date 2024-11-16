@@ -156,9 +156,13 @@ def match(request, tournament, match_id):
     """Match view."""
     tournament = models.Tournament.objects.get(name=tournament.capitalize())
     match = models.Match.objects.get(id=match_id)
+
+    match_sets = models.Set.objects.filter(match=match)
+    extra = 0 if match_sets.exists() else 5
+
     set_formset = modelformset_factory(
         models.Set,
-        extra=5,
+        extra=extra,
         fields=("__all__"),
         labels={
             "participant1_score": f"Puntuación de {match.participant1.user.first_name} {match.participant1.user.last_name}",  # noqa: E501
@@ -171,13 +175,17 @@ def match(request, tournament, match_id):
     )
 
     if request.method == "POST":
-        formset = set_formset(request.POST)
+        formset = set_formset(
+            request.POST,
+            queryset=match_sets,
+        )
         if formset.is_valid():
             formset.save()
             messages.success(request, "Puntuaciones guardadas correctamente.")
             return redirect("matches", tournament=tournament.name.lower())
     else:
         formset = set_formset(
+            queryset=match_sets,
             initial=[{"match": match, "set_number": i + 1} for i in range(5)],
         )
 

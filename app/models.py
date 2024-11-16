@@ -4,6 +4,7 @@ import logging
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.db.models import F
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -149,6 +150,27 @@ class Match(models.Model):
         """Return match."""
         return f"{self.participant1} vs {self.participant2}"
 
+    @property
+    def participant1_wins(self):
+        """Return participant1 wins."""
+        return self.set_set.filter(
+            participant1_score__gt=F("participant2_score"),
+        ).count()
+
+    @property
+    def participant2_wins(self):
+        """Return participant2 wins."""
+        return self.set_set.filter(
+            participant2_score__gt=F("participant1_score"),
+        ).count()
+
+    @property
+    def winner(self):
+        """Return winner."""
+        if self.participant1_wins > self.participant2_wins:
+            return self.participant1
+        return self.participant2
+
 
 class Set(models.Model):
     """Set model."""
@@ -166,3 +188,10 @@ class Set(models.Model):
     def __str__(self):
         """Return match."""
         return f"{self.participant1_score} - {self.participant2_score}"
+
+    @property
+    def winner(self):
+        """Return winner."""
+        if self.participant1_score > self.participant2_score:
+            return self.match.participant1
+        return self.match.participant2

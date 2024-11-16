@@ -1181,6 +1181,10 @@ select {
   border-top-width: 1px;
 }
 
+.border-s-2 {
+  border-inline-start-width: 2px;
+}
+
 .border-emerald-500 {
   --tw-border-opacity: 1;
   border-color: rgb(16 185 129 / var(--tw-border-opacity));
@@ -1218,6 +1222,24 @@ select {
 
 .border-transparent {
   border-color: transparent;
+}
+
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
+.border-slate-600 {
+  --tw-border-opacity: 1;
+  border-color: rgb(71 85 105 / var(--tw-border-opacity));
+}
+
+.border-slate-600\/75 {
+  border-color: rgb(71 85 105 / 0.75);
+}
+
+.border-slate-600\/60 {
+  border-color: rgb(71 85 105 / 0.6);
 }
 
 .bg-blue-50 {

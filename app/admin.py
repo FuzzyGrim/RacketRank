@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
-from app.models import Match, Participant, Tournament, User
+from app.models import Match, Participant, Set, Tournament, User
 
 
 class ParticipantInline(admin.TabularInline):
@@ -13,6 +13,19 @@ class ParticipantInline(admin.TabularInline):
 
     model = Participant
     extra = 1
+
+
+class SetInline(admin.TabularInline):
+    """
+    Inline admin interface for Set model.
+
+    Allows adding and editing sets directly from the Match admin page.
+    Shows set number and scores for both participants.
+    """
+
+    model = Set
+    extra = 1
+    ordering = ("set_number",)
 
 
 @admin.register(Tournament)
@@ -101,6 +114,7 @@ class MatchAdmin(admin.ModelAdmin):
     - List display showing match details
     - Filtering by tournament and round
     - Search functionality for tournament and participant names
+    - Inline management of match sets
     """
 
     list_display = ("tournament", "participant1", "participant2", "date", "round")
@@ -110,3 +124,24 @@ class MatchAdmin(admin.ModelAdmin):
         "participant1__user__username",
         "participant2__user__username",
     )
+    inlines = [SetInline]
+
+
+@admin.register(Set)
+class SetAdmin(admin.ModelAdmin):
+    """
+    Admin interface for Set model.
+
+    Provides a customized interface for managing match sets, including:
+    - List display showing set details and scores
+    - Filtering by match
+    - Ordering by set number
+    """
+
+    list_display = ("match", "set_number", "participant1_score", "participant2_score")
+    list_filter = ("match__tournament", "match")
+    search_fields = (
+        "match__participant1__user__username",
+        "match__participant2__user__username",
+    )
+    ordering = ("match", "set_number")

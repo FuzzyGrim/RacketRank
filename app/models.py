@@ -1,9 +1,20 @@
 import datetime
+import logging
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
+
+logger = logging.getLogger(__name__)
+
+round_choices = [
+    ("octavos", "Octavos de Final"),
+    ("cuartos", "Cuartos de Final"),
+    ("semifinal", "Semifinal"),
+    ("final", "Final"),
+]
 
 
 class User(AbstractUser):
@@ -24,6 +35,11 @@ class Tournament(models.Model):
 
     registered = models.ManyToManyField(User, related_name="registered")
     participants = models.ManyToManyField(User, through="Participant")
+    current_round = models.CharField(
+        max_length=255,
+        choices=round_choices,
+        default="octavos",
+    )
 
     def __str__(self):
         """Return name."""
@@ -52,6 +68,48 @@ class Tournament(models.Model):
             return "blue"
         return "red"
 
+    @property
+    def next_round(self):
+        """Return next round."""
+        next_round = {
+            "octavos": "cuartos",
+            "cuartos": "semifinal",
+            "semifinal": "final",
+            "final": None,
+        }
+        return next_round[self.current_round]
+
+    @property
+    def readable_next_round(self):
+        """Return readable round."""
+        return {
+            "octavos": "Octavos de Final",
+            "cuartos": "Cuartos de Final",
+            "semifinal": "Semifinal",
+            "final": "Final",
+        }[self.next_round]
+
+    def generate_matches(self):
+        """Generate matches for the current round."""
+        participants = list(self.participant_set.all())
+
+        if not participants:
+            logger.info("No hay participantes")
+            return
+
+        # Crear partidos emparejando de dos en dos
+        for i in range(0, len(participants) - 1, 2):
+            match = Match.objects.create(
+                tournament=self,
+                participant1=participants[i],
+                participant2=participants[i + 1],
+                date=timezone.now(),  # Update
+                round=self.current_round,
+            )
+            logger.info("Partido creado: %s", match)
+
+        return
+
 
 class Participant(models.Model):
     """Participant model."""
@@ -63,3 +121,48 @@ class Participant(models.Model):
     def __str__(self):
         """Return user."""
         return self.user.username
+
+
+class Match(models.Model):
+    """Match model."""
+
+    tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
+    participant1 = models.ForeignKey(
+        Participant,
+        on_delete=models.CASCADE,
+        related_name="participant1",
+    )
+    participant2 = models.ForeignKey(
+        Participant,
+        on_delete=models.CASCADE,
+        related_name="participant2",
+    )
+    date = models.DateTimeField()
+    round = models.CharField(max_length=255, choices=round_choices)
+
+    class Meta:
+        """Meta class."""
+
+        ordering = ["tournament", "date"]
+
+    def __str__(self):
+        """Return match."""
+        return f"{self.participant1} vs {self.participant2}"
+
+
+class Set(models.Model):
+    """Set model."""
+
+    set_number = models.IntegerField()
+    match = models.ForeignKey(Match, on_delete=models.CASCADE)
+    participant1_score = models.IntegerField()
+    participant2_score = models.IntegerField()
+
+    class Meta:
+        """Meta class."""
+
+        ordering = ["set_number"]
+
+    def __str__(self):
+        """Return match."""
+        return f"{self.participant1_score} - {self.participant2_score}"

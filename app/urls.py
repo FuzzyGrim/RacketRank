@@ -29,8 +29,18 @@ urlpatterns = [
     path("torneo/<tournament:tournament>", views.tournament, name="tournament"),
     path(
         "torneo/<tournament:tournament>/clasificación",
-        views.clasificacion,
-        name="clasificacion",
+        views.standings,
+        name="standings",
     ),
-    path("torneo/<tournament:tournament>/partidos", views.partidos, name="partidos"),
+    path("torneo/<tournament:tournament>/partidos", views.matches, name="matches"),
+    path(
+        "torneo/<tournament:tournament>/generate-matches/",
+        views.generate_matches,
+        name="generate_matches",
+    ),
+    path(
+        "torneo/<tournament:tournament>/partido/<int:match_id>",
+        views.match,
+        name="match",
+    ),
 ]

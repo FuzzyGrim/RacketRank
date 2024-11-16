@@ -1,0 +1,122 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% load nav_tags %}
+
+{% block title %}
+  RacketRank - {{ tournament.name }}
+{% endblock title %}
+
+{% block content %}
+  <div class="mx-auto max-w-7xl py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl">
+      <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+        <div class="px-4 py-6 sm:px-6">
+          <div class="flex gap-4">
+            <h1 class="text-2xl/7 font-semibold text-gray-900">Torneo de {{ tournament.name }}</h1>
+
+            {% if not request.user.is_superuser %}
+              <div class="shrink-0">
+                {% if user_registered %}
+                  <form method="post">
+                    {% csrf_token %}
+                    <button type="submit"
+                            {% if tournament.status != "Inscripciones abiertas" %}disabled{% endif %}
+                            name="desinscribir"
+                            class="relative inline-flex items-center gap-x-1.5 rounded-md bg-emerald-600 px-3 py-2 text-sm font-semibold text-white shadow-sm enabled:hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 disabled:opacity-60">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           fill="none"
+                           viewBox="0 0 24 24"
+                           stroke-width="1.5"
+                           stroke="currentColor"
+                           class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+                      </svg>
+
+                      <span>Inscrito</span>
+                    </button>
+                  </form>
+
+                {% else %}
+                  <form method="post">
+                    {% csrf_token %}
+                    <button type="submit"
+                            {% if tournament.status != "Inscripciones abiertas" %}disabled{% endif %}
+                            name="inscribir"
+                            class="relative inline-flex items-center gap-x-1.5 rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm enabled:hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red-600 disabled:opacity-60">
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                           fill="none"
+                           viewBox="0 0 24 24"
+                           stroke-width="1.5"
+                           stroke="currentColor"
+                           class="size-5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                      </svg>
+
+                      <span>No Inscrito</span>
+                    </button>
+                  </form>
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+
+          <span class="mt-4 inline-flex items-center rounded-md bg-{{ tournament.status_color }}-50 px-2 py-1 text-xs font-medium text-{{ tournament.status_color }}-700 ring-1 ring-inset ring-{{ tournament.status_color }}-600/20">{{ tournament.status }}</span>
+
+          <span class="mt-4 ms-2 max-w-2xl text-sm/6 text-gray-500">Fecha límite de inscripción: {{ tournament.inscription_end_date }} </span>
+
+          <div class="mt-8">
+            <div class="sm:hidden">
+              <label for="tabs" class="sr-only">Select a tab</label>
+              <select id="tabs"
+                      name="tabs"
+                      class="block w-full rounded-md border-gray-300 focus:border-emerald-500 focus:ring-emerald-500">
+                <option {% is_active_tab request 'tournament' as active %}
+                        {% if active %}selected{% endif %}>General</option>
+                <option {% is_active_tab request 'standings' as active %}
+                        {% if active %}selected{% endif %}>Clasificación</option>
+                <option {% is_active_tab request 'matches' as active %}
+                        {% if active %}selected{% endif %}>Partidos</option>
+              </select>
+            </div>
+            <div class="hidden sm:block">
+              <nav class="isolate flex divide-x divide-gray-200 rounded-lg shadow"
+                   aria-label="Tabs">
+                {% is_active_tab request 'tournament' as is_tournament %}
+                <a href="{% url 'tournament' tournament=tournament.name|lower %}"
+                   class="group relative min-w-0 flex-1 overflow-hidden {% if is_tournament %}text-gray-900{% else %}text-gray-500{% endif %} rounded-l-lg bg-white px-4 py-4 text-center text-sm font-medium hover:bg-gray-50 focus:z-10"
+                   {% if is_tournament %}aria-current="page"{% endif %}>
+                  <span>General</span>
+                  <span aria-hidden="true"
+                        class="absolute inset-x-0 bottom-0 h-0.5 {% if is_tournament %}bg-indigo-500{% else %}bg-transparent{% endif %}"></span>
+                </a>
+
+                {% is_active_tab request 'standings' as is_standings %}
+                <a href="{% url 'standings' tournament=tournament.name|lower %}"
+                   class="group relative min-w-0 flex-1 overflow-hidden {% if is_standings %}text-gray-900{% else %}text-gray-500{% endif %} bg-white px-4 py-4 text-center text-sm font-medium hover:bg-gray-50 hover:text-gray-700 focus:z-10"
+                   {% if is_standings %}aria-current="page"{% endif %}>
+                  <span>Clasificación</span>
+                  <span aria-hidden="true"
+                        class="absolute inset-x-0 bottom-0 h-0.5 {% if is_standings %}bg-indigo-500{% else %}bg-transparent{% endif %}"></span>
+                </a>
+
+                {% is_active_tab request 'matches' as is_matches %}
+                <a href="{% url 'matches' tournament=tournament.name|lower %}"
+                   class="group relative min-w-0 flex-1 overflow-hidden {% if is_matches %}text-gray-900{% else %}text-gray-500{% endif %} bg-white px-4 py-4 text-center text-sm font-medium hover:bg-gray-50 hover:text-gray-700 focus:z-10"
+                   {% if is_matches %}aria-current="page"{% endif %}>
+                  <span>Partidos</span>
+                  <span aria-hidden="true"
+                        class="absolute inset-x-0 bottom-0 h-0.5 {% if is_matches %}bg-indigo-500{% else %}bg-transparent{% endif %}"></span>
+                </a>
+              </nav>
+            </div>
+          </div>
+
+        </div>
+        <div class="border-t border-gray-100">
+          {% block tab %}
+          {% endblock tab %}
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

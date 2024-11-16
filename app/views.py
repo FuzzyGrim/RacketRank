@@ -1,8 +1,11 @@
+from django import forms
 from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordResetView
 from django.core.management.utils import get_random_secret_key
+from django.forms import modelformset_factory
 from django.shortcuts import redirect, render
 from django_email_verification import send_email
 
@@ -85,16 +88,98 @@ def tournament(request, tournament):
 
 
 @login_required
-def clasificacion(request, tournament):
+def standings(request, tournament):
     """Clasificacion view."""
     tournament = models.Tournament.objects.get(name=tournament.capitalize())
     context = {"tournament": tournament}
-    return render(request, "app/clasificacion.html", context)
+    return render(request, "app/standings.html", context)
 
 
 @login_required
-def partidos(request, tournament):
-    """Partidos view."""
+def matches(request, tournament):
+    """Match view."""
+    tournament_obj = models.Tournament.objects.get(name=tournament.capitalize())
+
+    # Get all rounds with matches
+    rounds_with_matches = (
+        models.Match.objects.filter(tournament=tournament_obj)
+        .values_list("round", flat=True)
+        .distinct()
+        .order_by("round")
+    )
+
+    # Create rounds data structure
+    rounds_data = []
+    for round_name in rounds_with_matches:
+        matches = (
+            models.Match.objects.filter(
+                tournament=tournament_obj,
+                round=round_name,
+            )
+            .select_related("participant1__user", "participant2__user")
+            .prefetch_related("set_set")
+        )
+
+        rounds_data.append(
+            {
+                "name": round_name.capitalize(),
+                "matches": matches,
+            },
+        )
+
+    context = {
+        "tournament": tournament_obj,
+        "rounds": rounds_data,
+        "can_generate_matches": (
+            request.user.is_staff
+            and tournament_obj.next_round
+            and tournament_obj.next_round not in rounds_with_matches
+        ),
+    }
+    return render(request, "app/matches.html", context)
+
+
+@login_required
+@staff_member_required
+def generate_matches(request, tournament):
+    """Generate matches for the next round."""
+    if request.method == "POST":
+        tournament = models.Tournament.objects.get(name=tournament.capitalize())
+        tournament.generate_matches()
+        messages.success(request, f"Matches generated for {tournament.current_round}")
+    return redirect("matches", tournament=tournament.name.lower())
+
+
+@login_required
+@staff_member_required
+def match(request, tournament, match_id):
+    """Match view."""
     tournament = models.Tournament.objects.get(name=tournament.capitalize())
-    context = {"tournament": tournament}
-    return render(request, "app/partidos.html", context)
+    match = models.Match.objects.get(id=match_id)
+    set_formset = modelformset_factory(
+        models.Set,
+        extra=5,
+        fields=("__all__"),
+        labels={
+            "participant1_score": f"Puntuación de {match.participant1.user.first_name} {match.participant1.user.last_name}",  # noqa: E501
+            "participant2_score": f"Puntuación de {match.participant2.user.first_name} {match.participant1.user.last_name}",  # noqa: E501
+        },
+        widgets={
+            "match": forms.HiddenInput(),
+            "set_number": forms.TextInput(attrs={"readonly": True, "hidden": True}),
+        },
+    )
+
+    if request.method == "POST":
+        formset = set_formset(request.POST)
+        if formset.is_valid():
+            formset.save()
+            messages.success(request, "Puntuaciones guardadas correctamente.")
+            return redirect("matches", tournament=tournament.name.lower())
+    else:
+        formset = set_formset(
+            initial=[{"match": match, "set_number": i + 1} for i in range(5)],
+        )
+
+    context = {"match": match, "formset": formset, "tournament": tournament}
+    return render(request, "app/match.html", context)

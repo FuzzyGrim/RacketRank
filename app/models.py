@@ -177,6 +177,7 @@ class Tournament(models.Model):
         for i, standing in enumerate(standings, 1):
             standing["tournament_points"] = self.get_position_points(i)
             standing["participant"].score = standing["tournament_points"]
+            standing["participant"].save()
 
         return standings
 

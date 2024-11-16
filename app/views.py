@@ -132,6 +132,7 @@ def matches(request, tournament):
         "rounds": rounds_data,
         "can_generate_matches": (
             request.user.is_staff
+            and tournament_obj.participants.count() > 1
             and tournament_obj.next_round
             and tournament_obj.next_round not in rounds_with_matches
             and tournament_obj.round_finished
@@ -184,7 +185,6 @@ def match(request, tournament, match_id):
         )
         if formset.is_valid():
             formset.save()
-            messages.success(request, "Puntuaciones guardadas correctamente.")
             return redirect("matches", tournament=tournament.name.lower())
     else:
         formset = set_formset(

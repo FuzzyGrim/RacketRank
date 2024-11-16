@@ -1,6 +1,6 @@
 import datetime
 import logging
-from random import shuffle
+from random import random, shuffle
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
@@ -130,6 +130,56 @@ class Tournament(models.Model):
 
         return
 
+    def get_position_points(self, position):
+        """Return points for given position."""
+        points_table = {
+            1: 2000,
+            2: 1500,
+            3: 1000,
+            4: 1000,
+        }
+        if position in points_table:
+            return points_table[position]
+
+        return 500 - ((position - 5) * 25)
+
+    def get_standings(self):
+        """Return ordered list of participants based on their performance."""
+        participants = self.participant_set.all()
+        standings = []
+        for participant in participants:
+            stats = participant.get_statistics()
+            standings.append(
+                {
+                    "participant": participant,
+                    "matches_won": stats["matches_won"],
+                    "sets_won": stats["sets_won"],
+                    "points_won": stats["points_won"],
+                    "points_lost": stats["points_lost"],
+                    "random_factor": random(),  # noqa: S311
+                },
+            )
+
+        # Sort standings
+        standings = sorted(
+            standings,
+            key=lambda x: (
+                x["matches_won"],
+                x["sets_won"],
+                x["points_won"],
+                -x["points_lost"],
+                x["random_factor"],
+            ),
+            reverse=True,
+        )
+
+        # Add tournament points based on position
+        for i, standing in enumerate(standings, 1):
+            standing["tournament_points"] = self.get_position_points(i)
+            standing["participant"].score = standing["tournament_points"]
+
+        return standings
+
 
 class Participant(models.Model):
     """Participant model."""
@@ -141,6 +191,36 @@ class Participant(models.Model):
     def __str__(self):
         """Return user."""
         return self.user.username
+
+    def get_statistics(self):
+        """Calculate match statistics for participant."""
+        matches = Match.objects.filter(
+            tournament=self.tournament,
+        ).filter(
+            models.Q(participant1=self) | models.Q(participant2=self),
+        )
+
+        matches_won = sum(1 for match in matches if match.winner == self)
+        sets_won = 0
+        points_won = 0
+        points_lost = 0
+
+        for match in matches:
+            if match.participant1 == self:
+                sets_won += match.participant1_wins
+                points_won += match.participant1_points
+                points_lost += match.participant2_points
+            else:
+                sets_won += match.participant2_wins
+                points_won += match.participant2_points
+                points_lost += match.participant1_points
+
+        return {
+            "matches_won": matches_won,
+            "sets_won": sets_won,
+            "points_won": points_won,
+            "points_lost": points_lost,
+        }
 
 
 class Match(models.Model):
@@ -200,6 +280,26 @@ class Match(models.Model):
         if self.participant1_wins < self.participant2_wins:
             return self.participant1
         return None
+
+    @property
+    def participant1_points(self):
+        """Return total points for participant1."""
+        return (
+            self.set_set.aggregate(
+                total=models.Sum("participant1_score"),
+            )["total"]
+            or 0
+        )
+
+    @property
+    def participant2_points(self):
+        """Return total points for participant2."""
+        return (
+            self.set_set.aggregate(
+                total=models.Sum("participant2_score"),
+            )["total"]
+            or 0
+        )
 
 
 class Set(models.Model):

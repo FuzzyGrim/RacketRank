@@ -88,14 +88,6 @@ def tournament(request, tournament):
 
 
 @login_required
-def standings(request, tournament):
-    """Clasificacion view."""
-    tournament = models.Tournament.objects.get(name=tournament.capitalize())
-    context = {"tournament": tournament}
-    return render(request, "app/standings.html", context)
-
-
-@login_required
 def matches(request, tournament):
     """Match view."""
     tournament_obj = models.Tournament.objects.get(name=tournament.capitalize())
@@ -207,3 +199,12 @@ def match(request, tournament, match_id):
 
     context = {"match": match, "formset": formset, "tournament": tournament}
     return render(request, "app/match.html", context)
+
+
+@login_required
+def standings(request, tournament):
+    """Player standings view."""
+    tournament = models.Tournament.objects.get(name=tournament.capitalize())
+    standings = tournament.get_standings()
+    context = {"tournament": tournament, "standings": standings}
+    return render(request, "app/standings.html", context)

@@ -101,7 +101,7 @@ class Tournament(models.Model):
     def generate_matches(self):
         """Generate matches for the current round."""
         # get shuffled participants that havent lost
-        matches = self.match_set.filter(round=self.current_round)
+        matches = self.match_set.all()
         participants = list(
             self.participant_set.exclude(
                 user__in=[match.loser.user for match in matches if match.loser],

@@ -105,7 +105,20 @@ def matches(request, tournament):
         models.Match.objects.filter(tournament=tournament_obj)
         .values_list("round", flat=True)
         .distinct()
-        .order_by("round")
+        .order_by()
+    )
+
+    round_order = {
+        "octavos": 1,
+        "cuartos": 2,
+        "semifinal": 3,
+        "final": 4,
+    }
+
+    rounds_with_matches = sorted(
+        rounds_with_matches,
+        key=lambda x: round_order[x],
+        reverse=True,
     )
 
     # Create rounds data structure

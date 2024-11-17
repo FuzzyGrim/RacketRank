@@ -2,7 +2,6 @@ import datetime
 import logging
 from random import shuffle
 
-from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models import F
@@ -56,14 +55,14 @@ class Tournament(models.Model):
     @property
     def status(self):
         """Return status."""
-        today = datetime.datetime.now(tz=settings.TZ).date()
-        if today < self.inscription_end_date:
+        today = timezone.now().date()
+        if self.current_round == "finalizado":
+            return "Finalizado"
+        if self.current_round == "no_comenzado" and today < self.start_date:
             return "Inscripciones abiertas"
-        if today >= self.inscription_end_date and today < self.start_date:
+        if today < self.start_date:
             return "Inscripciones cerradas"
-        if today >= self.start_date and today < self.end_date:
-            return "En curso"
-        return "Finalizado"
+        return "En curso"
 
     @property
     def status_color(self):
@@ -164,15 +163,17 @@ class Tournament(models.Model):
         shuffle(participants)
 
         # Crear partidos emparejando de dos en dos
+        match_date = timezone.now() + datetime.timedelta(days=2)
         for i in range(0, len(participants) - 1, 2):
             match = Match.objects.create(
                 tournament=self,
                 participant1=participants[i],
                 participant2=participants[i + 1],
-                date=timezone.now(),  # Update
+                date=match_date,
                 round=self.current_round,
             )
             logger.info("Partido creado: %s", match)
+            match_date += datetime.timedelta(days=1)
 
 
 class Participant(models.Model):

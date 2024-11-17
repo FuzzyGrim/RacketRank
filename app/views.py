@@ -92,13 +92,28 @@ def matches(request, tournament):
     """Match view."""
     tournament_obj = models.Tournament.objects.get(name=tournament.capitalize())
 
-    # Get all rounds with matches
-    rounds_with_matches = (
+    # Fetch all matches for the tournament with necessary relations in one query
+    matches = (
         models.Match.objects.filter(tournament=tournament_obj)
-        .values_list("round", flat=True)
-        .distinct()
-        .order_by()
+        .order_by("-date")
+        .select_related(
+            "participant1__user",
+            "participant2__user",
+            "tournament",
+        )
+        .prefetch_related("set_set")
     )
+
+    # Group matches by round
+    rounds_data = {}
+    for match in matches:
+        round_name = match.round
+        if round_name not in rounds_data:
+            rounds_data[round_name] = {
+                "name": round_name.capitalize(),
+                "matches": [],
+            }
+        rounds_data[round_name]["matches"].append(match)
 
     round_order = {
         "octavos": 1,
@@ -107,34 +122,16 @@ def matches(request, tournament):
         "final": 4,
     }
 
-    rounds_with_matches = sorted(
-        rounds_with_matches,
-        key=lambda x: round_order[x],
+    # Sort rounds based on predefined order
+    sorted_rounds = sorted(
+        rounds_data.values(),
+        key=lambda x: round_order[x["name"].lower()],
         reverse=True,
     )
 
-    # Create rounds data structure
-    rounds_data = []
-    for round_name in rounds_with_matches:
-        matches = (
-            models.Match.objects.filter(
-                tournament=tournament_obj,
-                round=round_name,
-            )
-            .select_related("participant1__user", "participant2__user")
-            .prefetch_related("set_set")
-        )
-
-        rounds_data.append(
-            {
-                "name": round_name.capitalize(),
-                "matches": matches,
-            },
-        )
-
     context = {
         "tournament": tournament_obj,
-        "rounds": rounds_data,
+        "rounds": sorted_rounds,
         "can_generate_matches": (
             request.user.is_staff
             and tournament_obj.participants.count() > 1
@@ -142,6 +139,7 @@ def matches(request, tournament):
             and tournament_obj.round_finished
         ),
     }
+
     return render(request, "app/matches.html", context)
 
 

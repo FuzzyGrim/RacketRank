@@ -546,7 +546,7 @@
       "tournament": 3,
       "participant1": 3,
       "participant2": 11,
-      "date": "2024-11-17T12:52:10Z",
+      "date": "2024-10-01T12:52:10Z",
       "round": "octavos"
     }
   },
@@ -557,7 +557,7 @@
       "tournament": 3,
       "participant1": 8,
       "participant2": 9,
-      "date": "2024-11-17T12:52:10.822Z",
+      "date": "2024-10-02T12:52:10Z",
       "round": "octavos"
     }
   },
@@ -568,7 +568,7 @@
       "tournament": 3,
       "participant1": 2,
       "participant2": 5,
-      "date": "2024-11-17T12:52:10.825Z",
+      "date": "2024-10-03T12:52:10Z",
       "round": "octavos"
     }
   },
@@ -579,7 +579,7 @@
       "tournament": 3,
       "participant1": 13,
       "participant2": 1,
-      "date": "2024-11-17T12:52:10.828Z",
+      "date": "2024-10-04T12:52:10Z",
       "round": "octavos"
     }
   },
@@ -590,7 +590,7 @@
       "tournament": 3,
       "participant1": 10,
       "participant2": 4,
-      "date": "2024-11-17T12:52:10.831Z",
+      "date": "2024-10-07T12:52:10Z",
       "round": "octavos"
     }
   },
@@ -601,7 +601,7 @@
       "tournament": 3,
       "participant1": 12,
       "participant2": 14,
-      "date": "2024-11-17T12:52:10.833Z",
+      "date": "2024-10-08T12:52:10Z",
       "round": "octavos"
     }
   },
@@ -612,7 +612,7 @@
       "tournament": 3,
       "participant1": 7,
       "participant2": 6,
-      "date": "2024-11-17T12:52:10.836Z",
+      "date": "2024-10-09T12:52:10Z",
       "round": "octavos"
     }
   },
@@ -623,7 +623,7 @@
       "tournament": 3,
       "participant1": 13,
       "participant2": 6,
-      "date": "2024-11-17T12:56:24.674Z",
+      "date": "2024-10-17T12:56:24Z",
       "round": "cuartos"
     }
   },
@@ -634,7 +634,7 @@
       "tournament": 3,
       "participant1": 8,
       "participant2": 5,
-      "date": "2024-11-17T12:56:24.677Z",
+      "date": "2024-10-18T12:56:24Z",
       "round": "cuartos"
     }
   },
@@ -645,7 +645,7 @@
       "tournament": 3,
       "participant1": 11,
       "participant2": 15,
-      "date": "2024-11-17T12:56:24.681Z",
+      "date": "2024-10-22T12:56:24Z",
       "round": "cuartos"
     }
   },
@@ -656,7 +656,7 @@
       "tournament": 3,
       "participant1": 14,
       "participant2": 10,
-      "date": "2024-11-17T12:56:24.684Z",
+      "date": "2024-10-21T12:56:24Z",
       "round": "cuartos"
     }
   },

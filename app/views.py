@@ -139,7 +139,6 @@ def matches(request, tournament):
             request.user.is_staff
             and tournament_obj.participants.count() > 1
             and tournament_obj.next_round
-            and tournament_obj.next_round not in rounds_with_matches
             and tournament_obj.round_finished
         ),
     }

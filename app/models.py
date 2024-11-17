@@ -86,7 +86,7 @@ class Tournament(models.Model):
             "semifinal": "final",
             "final": "finalizado",
         }
-        return next_round[self.current_round]
+        return next_round.get(self.current_round, None)
 
     @property
     def readable_next_round(self):
@@ -207,11 +207,11 @@ class Participant(models.Model):
     def position(self):
         """Return position."""
         position = {
-            "0": "Octavofinalista",
-            "1": "Cuartofinalista",
-            "2": "Semifinalista",
-            "3": "Finalista",
-            "4": "Campeón",
+            "1": "Octavofinalista",
+            "2": "Cuartofinalista",
+            "3": "Semifinalista",
+            "4": "Finalista",
+            "5": "Campeón",
         }
         return position.get(str(self.matches_won), "Participante")
 

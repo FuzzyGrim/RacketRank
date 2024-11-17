@@ -188,11 +188,11 @@ class Participant(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
-    score = models.IntegerField(default=0)
-    matches_won = models.IntegerField(default=0)
-    sets_won = models.IntegerField(default=0)
-    games_won = models.IntegerField(default=0)
-    games_lost = models.IntegerField(default=0)
+    score = models.PositiveIntegerField(default=0)
+    matches_won = models.PositiveIntegerField(default=0)
+    sets_won = models.PositiveIntegerField(default=0)
+    games_won = models.PositiveIntegerField(default=0)
+    games_lost = models.PositiveIntegerField(default=0)
 
     status = models.CharField(
         max_length=10,
@@ -300,10 +300,10 @@ class Match(models.Model):
 class Set(models.Model):
     """Set model."""
 
-    set_number = models.IntegerField()
+    set_number = models.PositiveIntegerField()
     match = models.ForeignKey(Match, on_delete=models.CASCADE)
-    participant1_score = models.IntegerField(null=True, blank=True)
-    participant2_score = models.IntegerField(null=True, blank=True)
+    participant1_score = models.PositiveIntegerField(null=True, blank=True)
+    participant2_score = models.PositiveIntegerField(null=True, blank=True)
 
     class Meta:
         """Meta class."""

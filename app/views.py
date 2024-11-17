@@ -77,13 +77,13 @@ def tournament(request, tournament):
     tournament = models.Tournament.objects.get(name=tournament.capitalize())
 
     if "inscribir" in request.POST:
-        tournament.registered.add(request.user)
+        tournament.participants.add(request.user)
     elif "desinscribir" in request.POST:
-        tournament.registered.remove(request.user)
+        tournament.participants.remove(request.user)
 
-    user_registered = tournament.registered.filter(id=request.user.id).exists()
+    user_applied = tournament.participants.filter(id=request.user.id).exists()
 
-    context = {"tournament": tournament, "user_registered": user_registered}
+    context = {"tournament": tournament, "user_applied": user_applied}
     return render(request, "app/tournament.html", context)
 
 
@@ -148,12 +148,11 @@ def matches(request, tournament):
 
 @login_required
 @staff_member_required
-def generate_matches(request, tournament):
+def settle_round(request, tournament):
     """Generate matches for the next round."""
     if request.method == "POST":
         tournament = models.Tournament.objects.get(name=tournament.capitalize())
-        tournament.generate_matches()
-        messages.success(request, f"Matches generated for {tournament.current_round}")
+        tournament.settle_round()
     return redirect("matches", tournament=tournament.name.lower())
 
 
@@ -205,6 +204,8 @@ def match(request, tournament, match_id):
 def standings(request, tournament):
     """Player standings view."""
     tournament = models.Tournament.objects.get(name=tournament.capitalize())
-    standings = tournament.get_standings()
-    context = {"tournament": tournament, "standings": standings}
+    participants = models.Participant.objects.filter(tournament=tournament).order_by(
+        "-score",
+    )
+    context = {"tournament": tournament, "participants": participants}
     return render(request, "app/standings.html", context)

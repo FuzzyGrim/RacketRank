@@ -18,6 +18,8 @@
                 <th scope="col"
                     class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Jugador</th>
                 <th scope="col"
+                    class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Puesto</th>
+                <th scope="col"
                     class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Sets Ganados</th>
                 <th scope="col"
                     class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Juegos Ganados</th>
@@ -28,16 +30,17 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
-              {% for standing in standings %}
+              {% for participant in participants %}
                 <tr>
                   <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{ forloop.counter }}</td>
                   <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">
-                    {{ standing.participant.user.first_name }} {{ standing.participant.user.last_name }}
+                    {{ participant.user.first_name }} {{ participant.user.last_name }}
                   </td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ standing.sets_won }}</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ standing.games_won }}</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ standing.games_lost }}</td>
-                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ standing.tournament_points }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ participant.position }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500">{{ participant.sets_won }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500">{{ participant.games_won }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500">{{ participant.games_lost }}</td>
+                  <td class="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500">{{ participant.score }}</td>
                 </tr>
               {% endfor %}
             </tbody>

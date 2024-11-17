@@ -9,10 +9,21 @@ class ParticipantInline(admin.TabularInline):
     Inline admin interface for Participant model.
 
     Allows adding and editing participants directly from the Tournament admin page.
+    Shows participant status and statistics.
     """
 
     model = Participant
     extra = 1
+    readonly_fields = ("matches_won", "sets_won", "games_won", "games_lost")
+    fields = (
+        "user",
+        "status",
+        "score",
+        "matches_won",
+        "sets_won",
+        "games_won",
+        "games_lost",
+    )
 
 
 class SetInline(admin.TabularInline):
@@ -35,9 +46,8 @@ class TournamentAdmin(admin.ModelAdmin):
 
     Provides a customized interface for managing tournaments, including:
     - List display with key tournament information
-    - Filtering by round and start date
+    - Filtering by round and dates
     - Search functionality
-    - Horizontal filter for managing registered users
     - Inline participant management
     """
 
@@ -50,7 +60,6 @@ class TournamentAdmin(admin.ModelAdmin):
     )
     list_filter = ("current_round", "start_date")
     search_fields = ("name",)
-    filter_horizontal = ("registered",)
     inlines = [ParticipantInline]
 
     fieldsets = (
@@ -69,7 +78,7 @@ class TournamentAdmin(admin.ModelAdmin):
         (
             _("Tournament Status"),
             {
-                "fields": ("current_round", "registered"),
+                "fields": ("current_round",),
             },
         ),
     )
@@ -95,14 +104,15 @@ class ParticipantAdmin(admin.ModelAdmin):
     Admin interface for Participant model.
 
     Provides a customized interface for managing tournament participants, including:
-    - List display showing user, tournament, and score
-    - Filtering by tournament
+    - List display showing user, tournament, status and statistics
+    - Filtering by tournament and status
     - Search functionality for user and tournament names
     """
 
-    list_display = ("user", "tournament", "score")
-    list_filter = ("tournament",)
+    list_display = ("user", "tournament", "status", "score", "matches_won", "sets_won")
+    list_filter = ("tournament", "status")
     search_fields = ("user__username", "tournament__name")
+    readonly_fields = ("matches_won", "sets_won", "games_won", "games_lost")
 
 
 @admin.register(Match)

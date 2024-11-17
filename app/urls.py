@@ -34,9 +34,9 @@ urlpatterns = [
     ),
     path("torneo/<tournament:tournament>/partidos", views.matches, name="matches"),
     path(
-        "torneo/<tournament:tournament>/generate-matches/",
-        views.generate_matches,
-        name="generate_matches",
+        "torneo/<tournament:tournament>/settle_round/",
+        views.settle_round,
+        name="settle_round",
     ),
     path(
         "torneo/<tournament:tournament>/partido/<int:match_id>",

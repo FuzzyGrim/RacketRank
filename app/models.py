@@ -1,21 +1,24 @@
 import datetime
 import logging
-from random import random, shuffle
+from random import shuffle
 
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models import F
+from django.db.models.functions import Random
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 
 logger = logging.getLogger(__name__)
 
 round_choices = [
+    ("no_comenzado", "No comenzado"),
     ("octavos", "Octavos de Final"),
     ("cuartos", "Cuartos de Final"),
     ("semifinal", "Semifinal"),
     ("final", "Final"),
+    ("finalizado", "Finalizado"),
 ]
 
 
@@ -35,12 +38,15 @@ class Tournament(models.Model):
     image = models.URLField()
     description = models.TextField()
 
-    registered = models.ManyToManyField(User, related_name="registered")
-    participants = models.ManyToManyField(User, through="Participant")
+    participants = models.ManyToManyField(
+        User,
+        through="Participant",
+        related_name="tournaments",
+    )
     current_round = models.CharField(
         max_length=255,
         choices=round_choices,
-        default="octavos",
+        default="no_comenzado",
     )
 
     def __str__(self):
@@ -74,10 +80,11 @@ class Tournament(models.Model):
     def next_round(self):
         """Return next round."""
         next_round = {
+            "no_comenzado": "octavos",
             "octavos": "cuartos",
             "cuartos": "semifinal",
             "semifinal": "final",
-            "final": None,
+            "final": "finalizado",
         }
         return next_round[self.current_round]
 
@@ -85,10 +92,12 @@ class Tournament(models.Model):
     def readable_next_round(self):
         """Return readable round."""
         return {
+            "no_comenzado": "No comenzado",
             "octavos": "Octavos de Final",
             "cuartos": "Cuartos de Final",
             "semifinal": "Semifinal",
             "final": "Final",
+            "finalizado": "Finalizado",
         }[self.next_round]
 
     @property
@@ -98,23 +107,61 @@ class Tournament(models.Model):
         matches = self.match_set.filter(round=self.current_round)
         return all(match.winner for match in matches)
 
-    def generate_matches(self):
-        """Generate matches for the current round."""
-        # get shuffled participants that havent lost
-        matches = self.match_set.all()
-        participants = list(
-            self.participant_set.exclude(
-                user__in=[match.loser.user for match in matches if match.loser],
-            ),
-        )
-        shuffle(participants)
+    def settle_round(self):
+        """Settle the current round."""
+        matches = self.match_set.filter(round=self.current_round)
+        for match in matches:
+            match.settle()
+
+        # cant do it in match settle because there
+        # may be players that advance without playing
+        participants = self.participant_set.filter(status="active")
+        for participant in participants:
+            participant.matches_won += 1
+            participant.save()
 
         self.current_round = self.next_round
         self.save()
 
-        if not participants:
-            logger.info("No hay participantes")
-            return
+        self.distribute_points()
+
+        if self.current_round != "finalizado":
+            self.generate_matches()
+
+    def distribute_points(self):
+        """Return points for given position."""
+        points_table = {
+            1: 2000,
+            2: 1500,
+            3: 1000,
+            4: 500,
+        }
+
+        participants = self.participant_set.exclude(
+            status="applied",
+        ).order_by(
+            F("matches_won").desc(),
+            F("sets_won").desc(),
+            F("games_won").desc(),
+            "games_lost",
+            Random(),
+        )
+
+        for position, participant in enumerate(participants, 1):
+            if position in points_table:
+                participant.score = points_table[position]
+            else:
+                participant.score = 475 - ((position - 5) * 25)
+            participant.save()
+
+    def generate_matches(self):
+        """Generate matches for the current round and go to the next round."""
+        participants = list(
+            self.participant_set.exclude(
+                status__in=["eliminated", "applied"],
+            ),
+        )
+        shuffle(participants)
 
         # Crear partidos emparejando de dos en dos
         for i in range(0, len(participants) - 1, 2):
@@ -127,100 +174,46 @@ class Tournament(models.Model):
             )
             logger.info("Partido creado: %s", match)
 
-        return
-
-    def get_position_points(self, position):
-        """Return points for given position."""
-        points_table = {
-            1: 2000,
-            2: 1500,
-            3: 1000,
-            4: 500,
-        }
-        if position in points_table:
-            return points_table[position]
-
-        return 475 - ((position - 5) * 25)
-
-    def get_standings(self):
-        """Return ordered list of participants based on their performance."""
-        participants = self.participant_set.all()
-        standings = []
-        for participant in participants:
-            stats = participant.get_statistics()
-            standings.append(
-                {
-                    "participant": participant,
-                    "matches_won": stats["matches_won"],
-                    "sets_won": stats["sets_won"],
-                    "games_won": stats["games_won"],
-                    "games_lost": stats["games_lost"],
-                    "random_factor": random(),  # noqa: S311
-                },
-            )
-
-        # Sort standings
-        standings = sorted(
-            standings,
-            key=lambda x: (
-                x["matches_won"],
-                x["sets_won"],
-                x["games_won"],
-                -x["games_lost"],
-                x["random_factor"],
-            ),
-            reverse=True,
-        )
-
-        # Add tournament points based on position
-        for i, standing in enumerate(standings, 1):
-            standing["tournament_points"] = self.get_position_points(i)
-            standing["participant"].score = standing["tournament_points"]
-            standing["participant"].save()
-
-        return standings
-
 
 class Participant(models.Model):
     """Participant model."""
 
+    class Status(models.TextChoices):
+        """Status choices."""
+
+        APPLIED = "applied", "Applied"
+        ACTIVE = "active", "Active"
+        ELIMINATED = "eliminated", "Eliminated"
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     tournament = models.ForeignKey(Tournament, on_delete=models.CASCADE)
     score = models.IntegerField(default=0)
+    matches_won = models.IntegerField(default=0)
+    sets_won = models.IntegerField(default=0)
+    games_won = models.IntegerField(default=0)
+    games_lost = models.IntegerField(default=0)
+
+    status = models.CharField(
+        max_length=10,
+        choices=Status.choices,
+        default=Status.APPLIED,
+    )
 
     def __str__(self):
         """Return user."""
         return self.user.username
 
-    def get_statistics(self):
-        """Calculate match statistics for participant."""
-        matches = Match.objects.filter(
-            tournament=self.tournament,
-        ).filter(
-            models.Q(participant1=self) | models.Q(participant2=self),
-        )
-
-        matches_won = sum(1 for match in matches if match.winner == self)
-        sets_won = 0
-        games_won = 0
-        games_lost = 0
-
-        for match in matches:
-            if match.participant1 == self:
-                sets_won += match.participant1_wins
-                games_won += match.participant1_points
-                games_lost += match.participant2_points
-            else:
-                sets_won += match.participant2_wins
-                games_won += match.participant2_points
-                games_lost += match.participant1_points
-
-        return {
-            "matches_won": matches_won,
-            "sets_won": sets_won,
-            "games_won": games_won,
-            "games_lost": games_lost,
+    @property
+    def position(self):
+        """Return position."""
+        position = {
+            "0": "Octavofinalista",
+            "1": "Cuartofinalista",
+            "2": "Semifinalista",
+            "3": "Finalista",
+            "4": "Campeón",
         }
+        return position.get(str(self.matches_won), "Participante")
 
 
 class Match(models.Model):
@@ -249,57 +242,58 @@ class Match(models.Model):
         """Return match."""
         return f"{self.participant1} vs {self.participant2}"
 
+    def settle(self):
+        """Settle the match."""
+        for set_played in self.set_set.all():
+            if (
+                set_played.participant1_score is None
+                or set_played.participant2_score is None
+            ):
+                continue
+            self.participant1.games_won += set_played.participant1_score
+            self.participant2.games_won += set_played.participant2_score
+
+            self.participant1.games_lost += set_played.participant2_score
+            self.participant2.games_lost += set_played.participant1_score
+
+            if set_played.participant1_score > set_played.participant2_score:
+                self.participant1.sets_won += 1
+            else:
+                self.participant2.sets_won += 1
+
+        if self.winner == self.participant1:
+            self.participant2.status = Participant.Status.ELIMINATED
+        else:
+            self.participant1.status = Participant.Status.ELIMINATED
+
+        self.participant1.save()
+        self.participant2.save()
+
     @property
-    def participant1_wins(self):
-        """Return participant1 wins."""
+    def participant1_set_wins(self):
+        """Return number of sets won by participant1."""
         return self.set_set.filter(
             participant1_score__gt=F("participant2_score"),
         ).count()
 
     @property
-    def participant2_wins(self):
-        """Return participant2 wins."""
+    def participant2_set_wins(self):
+        """Return number of sets won by participant2."""
         return self.set_set.filter(
             participant2_score__gt=F("participant1_score"),
         ).count()
 
     @property
     def winner(self):
-        """Return winner."""
-        if self.participant1_wins > self.participant2_wins:
+        """Return match winner."""
+        participant1_sets_win = self.participant1_set_wins
+        participant2_sets_win = self.participant2_set_wins
+
+        if participant1_sets_win > participant2_sets_win:
             return self.participant1
-        if self.participant1_wins < self.participant2_wins:
+        if participant1_sets_win < participant2_sets_win:
             return self.participant2
         return None
-
-    @property
-    def loser(self):
-        """Return loser."""
-        if self.participant1_wins > self.participant2_wins:
-            return self.participant2
-        if self.participant1_wins < self.participant2_wins:
-            return self.participant1
-        return None
-
-    @property
-    def participant1_points(self):
-        """Return total points for participant1."""
-        return (
-            self.set_set.aggregate(
-                total=models.Sum("participant1_score"),
-            )["total"]
-            or 0
-        )
-
-    @property
-    def participant2_points(self):
-        """Return total points for participant2."""
-        return (
-            self.set_set.aggregate(
-                total=models.Sum("participant2_score"),
-            )["total"]
-            or 0
-        )
 
 
 class Set(models.Model):

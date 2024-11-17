@@ -16,7 +16,7 @@
 
             {% if not request.user.is_superuser %}
               <div class="shrink-0">
-                {% if user_registered %}
+                {% if user_applied %}
                   <form method="post">
                     {% csrf_token %}
                     <button type="submit"

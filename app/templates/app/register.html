@@ -36,31 +36,12 @@
 
           {% if messages %}
             <div class="messages mt-5">
-                {% for message in messages %}
-                <div class="alert alert-{{ message.tags }}">
-                    {{ message }}
-                </div>
-                {% endfor %}
+              {% for message in messages %}<div class="alert alert-{{ message.tags }}">{{ message }}</div>{% endfor %}
             </div>
           {% endif %}
 
           <form method="post" class="mt-8 grid grid-cols-6 gap-6">
             {% csrf_token %}
-
-            {% if form.errors %}
-            <div class="col-span-6 mt-4">
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative">
-                    {% for field in form %}
-                        {% for error in field.errors %}
-                            <p>{{ field.label }}: {{ error }}</p>
-                        {% endfor %}
-                    {% endfor %}
-                    {% for error in form.non_field_errors %}
-                        <p>{{ error }}</p>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endif %}
 
             <div class="col-span-6 sm:col-span-3">
               <label for="first_name" class="block text-sm font-medium text-gray-700">Nombre</label>
@@ -70,6 +51,7 @@
                      required
                      class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                      value="{{ form.first_name.value|default:'' }}" />
+              {% if form.first_name.errors %}<p class="text-red-500 text-sm mt-1">{{ form.first_name.errors.0 }}</p>{% endif %}
             </div>
 
             <div class="col-span-6 sm:col-span-3">
@@ -90,17 +72,19 @@
                      required
                      class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                      value="{{ form.username.value|default:'' }}" />
+              {% if form.username.errors %}<p class="text-red-500 text-sm mt-1">{{ form.username.errors.0 }}</p>{% endif %}
             </div>
 
             <div class="col-span-6 sm:col-span-3">
               <label for="telefono" class="block text-sm font-medium text-gray-700">Teléfono</label>
-              <input type="text"
+              <input type="tel"
                      pattern="[0-9]{8-12}"
                      id="telefono"
                      name="telefono"
                      required
                      class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                      value="{{ form.telefono.value|default:'' }}" />
+              {% if form.telefono.errors %}<p class="text-red-500 text-sm mt-1">{{ form.telefono.errors.0 }}</p>{% endif %}
             </div>
 
             <div class="col-span-6">
@@ -111,6 +95,7 @@
                      required
                      class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                      value="{{ form.email.value|default:'' }}" />
+              {% if form.email.errors %}<p class="text-red-500 text-sm mt-1">{{ form.email.errors.0 }}</p>{% endif %}
             </div>
 
             <div class="col-span-6 sm:col-span-3">
@@ -120,6 +105,7 @@
                      name="password1"
                      required
                      class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
+              {% if form.password1.errors %}<p class="text-red-500 text-sm mt-1">{{ form.password1.errors.0 }}</p>{% endif %}
             </div>
 
             <div class="col-span-6 sm:col-span-3">
@@ -129,17 +115,19 @@
                      name="password2"
                      required
                      class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm" />
+              {% if form.password2.errors %}<p class="text-red-500 text-sm mt-1">{{ form.password2.errors.0 }}</p>{% endif %}
             </div>
 
             <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-              <button type="submit" 
+              <button type="submit"
                       class="inline-block shrink-0 rounded-md border border-emerald-600 bg-emerald-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-emerald-600 focus:outline-none focus:ring active:text-emerald-500">
                 Regístrate
               </button>
 
               <p class="mt-4 text-sm text-gray-500 sm:mt-0">
                 ¿Ya tienes una cuenta?
-                <a href="{% url 'login' %}" class="text-emerald-700 hover:text-emerald-600 underline">Inicia sesión</a>.
+                <a href="{% url 'login' %}"
+                   class="text-emerald-700 hover:text-emerald-600 underline">Inicia sesión</a>.
               </p>
             </div>
           </form>

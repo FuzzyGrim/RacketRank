@@ -1036,8 +1036,8 @@
     "fields": {
       "set_number": 3,
       "match": 8,
-      "participant1_score": 6,
-      "participant2_score": 3
+      "participant1_score": 3,
+      "participant2_score": 6
     }
   },
   {

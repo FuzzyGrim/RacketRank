@@ -109,7 +109,6 @@ class Tournament(models.Model):
         )
         shuffle(participants)
 
-        # update round
         self.current_round = self.next_round
         self.save()
 
@@ -136,12 +135,12 @@ class Tournament(models.Model):
             1: 2000,
             2: 1500,
             3: 1000,
-            4: 1000,
+            4: 500,
         }
         if position in points_table:
             return points_table[position]
 
-        return 500 - ((position - 5) * 25)
+        return 475 - ((position - 5) * 25)
 
     def get_standings(self):
         """Return ordered list of participants based on their performance."""
@@ -154,8 +153,8 @@ class Tournament(models.Model):
                     "participant": participant,
                     "matches_won": stats["matches_won"],
                     "sets_won": stats["sets_won"],
-                    "points_won": stats["points_won"],
-                    "points_lost": stats["points_lost"],
+                    "games_won": stats["games_won"],
+                    "games_lost": stats["games_lost"],
                     "random_factor": random(),  # noqa: S311
                 },
             )
@@ -166,8 +165,8 @@ class Tournament(models.Model):
             key=lambda x: (
                 x["matches_won"],
                 x["sets_won"],
-                x["points_won"],
-                -x["points_lost"],
+                x["games_won"],
+                -x["games_lost"],
                 x["random_factor"],
             ),
             reverse=True,
@@ -203,24 +202,24 @@ class Participant(models.Model):
 
         matches_won = sum(1 for match in matches if match.winner == self)
         sets_won = 0
-        points_won = 0
-        points_lost = 0
+        games_won = 0
+        games_lost = 0
 
         for match in matches:
             if match.participant1 == self:
                 sets_won += match.participant1_wins
-                points_won += match.participant1_points
-                points_lost += match.participant2_points
+                games_won += match.participant1_points
+                games_lost += match.participant2_points
             else:
                 sets_won += match.participant2_wins
-                points_won += match.participant2_points
-                points_lost += match.participant1_points
+                games_won += match.participant2_points
+                games_lost += match.participant1_points
 
         return {
             "matches_won": matches_won,
             "sets_won": sets_won,
-            "points_won": points_won,
-            "points_lost": points_lost,
+            "games_won": games_won,
+            "games_lost": games_lost,
         }
 
 

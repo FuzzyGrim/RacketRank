@@ -43,4 +43,5 @@ urlpatterns = [
         views.match,
         name="match",
     ),
+    path("perfil", views.profile, name="profile"),
 ]

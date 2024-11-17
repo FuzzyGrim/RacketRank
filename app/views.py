@@ -10,7 +10,7 @@ from django.shortcuts import redirect, render
 from django_email_verification import send_email
 
 from app import models
-from app.forms import CustomUserCreationForm
+from app.forms import CustomUserCreationForm, UserProfileForm
 
 
 @login_required
@@ -206,3 +206,17 @@ def standings(request, tournament):
     )
     context = {"tournament": tournament, "participants": participants}
     return render(request, "app/standings.html", context)
+
+
+@login_required
+def profile(request):
+    """Profile view for updating user information."""
+    if request.method == "POST":
+        form = UserProfileForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect("profile")
+    else:
+        form = UserProfileForm(instance=request.user)
+
+    return render(request, "app/profile.html", {"form": form})

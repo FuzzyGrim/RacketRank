@@ -1,16 +1,14 @@
-from django import forms
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordResetView
 from django.core.management.utils import get_random_secret_key
-from django.forms import modelformset_factory
 from django.shortcuts import redirect, render
 from django_email_verification import send_email
 
 from app import models
-from app.forms import CustomUserCreationForm, UserProfileForm
+from app.forms import CustomUserCreationForm, UserProfileForm, create_set_formset
 
 
 @login_required
@@ -159,25 +157,9 @@ def match(request, tournament, match_id):
     """Match view."""
     tournament = models.Tournament.objects.get(name=tournament.capitalize())
     match = models.Match.objects.get(id=match_id)
-
     match_sets = models.Set.objects.filter(match=match)
-    extra = 0 if match_sets.exists() else 5
 
-    set_formset = modelformset_factory(
-        models.Set,
-        extra=extra,
-        fields=("__all__"),
-        labels={
-            "participant1_score": f"Puntuación de {match.participant1.user.first_name} {match.participant1.user.last_name}",  # noqa: E501
-            "participant2_score": f"Puntuación de {match.participant2.user.first_name} {match.participant1.user.last_name}",  # noqa: E501
-        },
-        widgets={
-            "match": forms.HiddenInput(),
-            "set_number": forms.TextInput(attrs={"readonly": True, "hidden": True}),
-            "participant1_score": forms.NumberInput(attrs={"required": False}),
-            "participant2_score": forms.NumberInput(attrs={"required": False}),
-        },
-    )
+    set_formset = create_set_formset(match)
 
     if request.method == "POST":
         formset = set_formset(

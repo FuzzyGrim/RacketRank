@@ -1,7 +1,10 @@
 from django import forms
 from django.contrib.auth import get_user_model, password_validation
 from django.contrib.auth.forms import UserChangeForm, UserCreationForm
+from django.forms import modelformset_factory
 from phonenumber_field.formfields import PhoneNumberField
+
+from app.models import Set
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -75,3 +78,39 @@ class UserProfileForm(UserChangeForm):
             user.save()
 
         return user
+
+
+def create_set_formset(match):
+    """Create a formset for match sets."""
+
+    class SetForm(forms.ModelForm):
+        """Form for individual sets in a match."""
+
+        class Meta:
+            model = Set
+            fields = ["match", "set_number", "participant1_score", "participant2_score"]
+            labels = {
+                "participant1_score": (
+                    f"Puntuación de {match.participant1.user.first_name} "
+                    f"{match.participant1.user.last_name}"
+                ),
+                "participant2_score": (
+                    f"Puntuación de {match.participant2.user.first_name} "
+                    f"{match.participant2.user.last_name}"
+                ),
+            }
+            widgets = {
+                "match": forms.HiddenInput(),
+                "set_number": forms.TextInput(attrs={"readonly": True, "hidden": True}),
+                "participant1_score": forms.NumberInput(attrs={"required": False}),
+                "participant2_score": forms.NumberInput(attrs={"required": False}),
+            }
+
+    match_sets = Set.objects.filter(match=match)
+    extra = 0 if match_sets.exists() else 5
+
+    return modelformset_factory(
+        Set,
+        form=SetForm,
+        extra=extra,
+    )

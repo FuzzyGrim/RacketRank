@@ -12,6 +12,7 @@ En una terminal, ejecutar los siguientes comandos:
 
 ```
 cd tailwind
+npm install
 npm run dev
 ```
 

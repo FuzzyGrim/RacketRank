@@ -29,3 +29,5 @@ Para cargar los datos de prueba, ejecutar el siguiente comando:
 ```
 python manage.py loaddata fixtures.json
 ```
+
+Esto cargará los datos de prueba en la base de datos. Para acceder al panel de administración, se puede utilizar el usuario `admin` con contraseña `admin`. Para acceder como usuario normal, se puede utilizar el usuario `test` con contraseña `test`.

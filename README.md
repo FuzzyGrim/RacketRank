@@ -5,7 +5,7 @@ Crear un entorno virtual con el siguiente comando:
 python -m venv venv
 ```
 
-Activa el entorno virtual dependiendo del sistema operativo: [Guía](https://docs.python.org/3/library/venv.html#how-venvs-work)
+Activa el entorno virtual dependiendo de tu shell: [Guía](https://docs.python.org/3/library/venv.html#how-venvs-work)
 
 
 En una terminal, ejecutar los siguientes comandos:
@@ -30,4 +30,4 @@ Para cargar los datos de prueba, ejecutar el siguiente comando:
 python manage.py loaddata fixtures.json
 ```
 
-Esto cargará los datos de prueba en la base de datos. Para acceder al panel de administración, se puede utilizar el usuario `admin` con contraseña `admin`. Para acceder como usuario normal, se puede utilizar el usuario `test` con contraseña `test`.
+Esto cargará los datos de prueba en la base de datos. Para acceder como administrador, se puede utilizar el usuario `admin` con contraseña `admin`. Para acceder como usuario normal, se puede utilizar el usuario `test` con contraseña `test`.

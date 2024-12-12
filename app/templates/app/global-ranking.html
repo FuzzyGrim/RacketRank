@@ -1,0 +1,59 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% load nav_tags %}
+
+{% block title %}
+  RacketRank - Ranking Global
+{% endblock title %}
+
+{% block content %}
+  <div class="mx-auto max-w-7xl py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl">
+      <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+        <div class="px-4 py-6 sm:px-6">
+          <h1 class="text-2xl/7 font-semibold text-gray-900 text-center">Ranking Global</h1>
+        </div>
+
+        <div class="border-t border-gray-100">
+          <div class="px-4 sm:px-6 lg:px-8">
+            <div class="mt-8 flow-root">
+              <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
+                  <table class="min-w-full divide-y divide-gray-300">
+                    <thead>
+                      <tr>
+                        <th scope="col"
+                            class="py-3.5 pl-4 pr-3 text-left text-sm font-semibold text-gray-900 sm:pl-0">
+                          Posición
+                        </th>
+                        <th scope="col"
+                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Jugador</th>
+                        <th scope="col"
+                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Sets Ganados</th>
+                        <th scope="col"
+                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Juegos Ganados</th>
+                        <th scope="col"
+                            class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Juegos perdidos</th>
+                      </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                      {% for user in rankings %}
+                        <tr>
+                          <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-0">{{ forloop.counter }}</td>
+                          <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ user.first_name }} {{ user.last_name }}</td>
+                          <td class="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500">{{ user.total_sets_won|default:"0" }}</td>
+                          <td class="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500">{{ user.total_games_won|default:"0" }}</td>
+                          <td class="whitespace-nowrap px-3 py-4 text-center text-sm text-gray-500">{{ user.total_games_lost|default:"0" }}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock content %}

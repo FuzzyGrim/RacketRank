@@ -1,0 +1,1878 @@
+[
+  {
+    "model": "app.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$JjMBlcO3ZBJKxOoB0yvgCG$0Qtz0pah/DVWM6rYPBqlSqMoX1g3yXmqlEbaePB0f64=",
+      "last_login": "2024-11-19T22:27:34.812Z",
+      "is_superuser": true,
+      "username": "admin",
+      "first_name": "",
+      "last_name": "",
+      "email": "admin@tenis.upm.es",
+      "is_staff": true,
+      "is_active": true,
+      "date_joined": "2024-11-19T22:27:14.270Z",
+      "telefono": "",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty123$9XjhgF",
+      "last_login": "2024-11-14T10:00:00Z",
+      "is_superuser": false,
+      "username": "carmen.garcia",
+      "first_name": "Carmen",
+      "last_name": "García Ruiz",
+      "email": "carmen.garcia@ejemplo.es",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-14T10:00:00Z",
+      "telefono": "+34611222333",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty124$9XjhgF",
+      "last_login": "2024-11-14T10:00:00Z",
+      "is_superuser": false,
+      "username": "antonio.lopez",
+      "first_name": "Antonio",
+      "last_name": "López Martínez",
+      "email": "antonio.lopez@ejemplo.es",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-14T10:00:00Z",
+      "telefono": "+34622333444",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty125$9XjhgF",
+      "last_login": "2024-11-14T10:00:00Z",
+      "is_superuser": false,
+      "username": "isabel.fernandez",
+      "first_name": "Isabel",
+      "last_name": "Fernández Sánchez",
+      "email": "isabel.fernandez@ejemplo.es",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-14T10:00:00Z",
+      "telefono": "+34633444555",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.user",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty126$9XjhgF",
+      "last_login": "2024-11-14T10:00:00Z",
+      "is_superuser": false,
+      "username": "manuel.rodriguez",
+      "first_name": "Manuel",
+      "last_name": "Rodríguez Navarro",
+      "email": "manuel.rodriguez@ejemplo.es",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-14T10:00:00Z",
+      "telefono": "+34644555666",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.user",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty127$9XjhgF",
+      "last_login": "2024-11-14T10:00:00Z",
+      "is_superuser": false,
+      "username": "laura.moreno",
+      "first_name": "Laura",
+      "last_name": "Moreno Torres",
+      "email": "laura.moreno@ejemplo.es",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-14T10:00:00Z",
+      "telefono": "+34655666777",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.user",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty128$9XjhgF",
+      "last_login": "2024-11-14T10:00:00Z",
+      "is_superuser": false,
+      "username": "javier.jimenez",
+      "first_name": "Javier",
+      "last_name": "Jiménez Ortiz",
+      "email": "javier.jimenez@ejemplo.es",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-14T10:00:00Z",
+      "telefono": "+34666777888",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.user",
+    "pk": 8,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty129$9XjhgF",
+      "last_login": "2024-11-14T10:00:00Z",
+      "is_superuser": false,
+      "username": "ana.perez",
+      "first_name": "Ana",
+      "last_name": "Pérez Romero",
+      "email": "ana.perez@ejemplo.es",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-14T10:00:00Z",
+      "telefono": "+34677888999",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.user",
+    "pk": 9,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty130$9XjhgF",
+      "last_login": "2024-11-14T10:00:00Z",
+      "is_superuser": false,
+      "username": "david.munoz",
+      "first_name": "David",
+      "last_name": "Muñoz Vega",
+      "email": "david.munoz@ejemplo.es",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-14T10:00:00Z",
+      "telefono": "+34688999000",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.user",
+    "pk": 10,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty131$9XjhgF",
+      "last_login": "2024-11-14T10:00:00Z",
+      "is_superuser": false,
+      "username": "maria.santos",
+      "first_name": "María",
+      "last_name": "Santos Díaz",
+      "email": "maria.santos@ejemplo.es",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-14T10:00:00Z",
+      "telefono": "+34699000111",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.user",
+    "pk": 11,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty132$9XjhgF",
+      "last_login": "2024-11-14T10:00:00Z",
+      "is_superuser": false,
+      "username": "pablo.ruiz",
+      "first_name": "Pablo",
+      "last_name": "Ruiz Castro",
+      "email": "pablo.ruiz@ejemplo.es",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-14T10:00:00Z",
+      "telefono": "+34600111222",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.user",
+    "pk": 12,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty133$9XjhgF",
+      "last_login": "2024-11-14T10:00:00Z",
+      "is_superuser": false,
+      "username": "lucia.martin",
+      "first_name": "Lucía",
+      "last_name": "Martín Flores",
+      "email": "lucia.martin@ejemplo.es",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-14T10:00:00Z",
+      "telefono": "+34611333444",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.user",
+    "pk": 13,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty134$9XjhgF",
+      "last_login": "2024-11-14T10:00:00Z",
+      "is_superuser": false,
+      "username": "carlos.gomez",
+      "first_name": "Carlos",
+      "last_name": "Gómez Reyes",
+      "email": "carlos.gomez@ejemplo.es",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-14T10:00:00Z",
+      "telefono": "+34622444555",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.user",
+    "pk": 14,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty135$9XjhgF",
+      "last_login": "2024-11-14T10:00:00Z",
+      "is_superuser": false,
+      "username": "elena.torres",
+      "first_name": "Elena",
+      "last_name": "Torres Blanco",
+      "email": "elena.torres@ejemplo.es",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-14T10:00:00Z",
+      "telefono": "+34633555666",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.user",
+    "pk": 15,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty136$9XjhgF",
+      "last_login": "2024-11-14T10:00:00Z",
+      "is_superuser": false,
+      "username": "miguel.herrera",
+      "first_name": "Miguel",
+      "last_name": "Herrera Campos",
+      "email": "miguel.herrera@ejemplo.es",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-14T10:00:00Z",
+      "telefono": "+34644666777",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.user",
+    "pk": 16,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty137$9XjhgF",
+      "last_login": "2024-11-14T10:00:00Z",
+      "is_superuser": false,
+      "username": "sofia.navarro",
+      "first_name": "Sofía",
+      "last_name": "Navarro Ramos",
+      "email": "sofia.navarro@ejemplo.es",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-14T10:00:00Z",
+      "telefono": "+34655777888",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.user",
+    "pk": 17,
+    "fields": {
+      "password": "pbkdf2_sha256$600000$8dKEjnMzpqwerty138$9XjhgF",
+      "last_login": "2024-11-14T10:00:00Z",
+      "is_superuser": false,
+      "username": "diego.molina",
+      "first_name": "Diego",
+      "last_name": "Molina Cruz",
+      "email": "diego.molina@ejemplo.es",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-14T10:00:00Z",
+      "telefono": "+34666888999",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.user",
+    "pk": 18,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$zYvLp6JZl01VZt6bYeY6Xk$E85T7bkNCCHkFFhUhdxuhq2lq94GSvGafpnyovYZVPU=",
+      "last_login": "2024-12-12T21:36:46.876Z",
+      "is_superuser": false,
+      "username": "test",
+      "first_name": "Te",
+      "last_name": "St",
+      "email": "xilacai1@gmail.com",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2024-11-15T22:15:27.622Z",
+      "telefono": "+34666666661",
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "app.tournament",
+    "pk": 1,
+    "fields": {
+      "name": "Primavera",
+      "inscription_end_date": "2024-03-20",
+      "start_date": "2024-04-01",
+      "end_date": "2024-06-01",
+      "image": "https://images.unsplash.com/photo-1499510318569-1a3d67dc3976?q=80&w=2196&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "description": "Comienza el año con energía en nuestro torneo más esperado. ¡Demuestra tu talento en la cancha y sé parte de la mejor competencia de la temporada!",
+      "current_round": "finalizado"
+    }
+  },
+  {
+    "model": "app.tournament",
+    "pk": 2,
+    "fields": {
+      "name": "Verano",
+      "inscription_end_date": "2024-06-20",
+      "start_date": "2024-07-01",
+      "end_date": "2024-09-01",
+      "image": "https://images.unsplash.com/photo-1554068865-24cecd4e34b8?q=80&w=2340&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "description": "El calor sube y la competencia también. Únete al torneo de verano donde los mejores jugadores se encuentran para disputar emocionantes partidos.",
+      "current_round": "finalizado"
+    }
+  },
+  {
+    "model": "app.tournament",
+    "pk": 3,
+    "fields": {
+      "name": "Otoño",
+      "inscription_end_date": "2024-09-20",
+      "start_date": "2024-10-01",
+      "end_date": "2024-12-01",
+      "image": "https://images.unsplash.com/photo-1644951521196-2e683819f122?q=80&w=2054&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "description": "La temporada dorada del tenis te espera. Participa en nuestro torneo de otoño y forma parte de una experiencia única llena de competitividad y diversión.",
+      "current_round": "finalizado"
+    }
+  },
+  {
+    "model": "app.tournament",
+    "pk": 4,
+    "fields": {
+      "name": "Invierno",
+      "inscription_end_date": "2024-12-20",
+      "start_date": "2025-01-01",
+      "end_date": "2025-03-01",
+      "image": "https://images.unsplash.com/photo-1509646870971-36861b297fc2?q=80&w=2533&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "description": "Cierra el año con broche de oro en nuestro torneo invernal. Una oportunidad perfecta para demostrar tu progreso y enfrentar nuevos desafíos.",
+      "current_round": "no_comenzado"
+    }
+  },
+  {
+    "model": "app.participant",
+    "pk": 1,
+    "fields": {
+      "user": 2,
+      "tournament": 3,
+      "score": 375,
+      "matches_won": 1,
+      "sets_won": 2,
+      "games_won": 21,
+      "games_lost": 24,
+      "status": "eliminated"
+    }
+  },
+  {
+    "model": "app.participant",
+    "pk": 2,
+    "fields": {
+      "user": 3,
+      "tournament": 3,
+      "score": 350,
+      "matches_won": 1,
+      "sets_won": 2,
+      "games_won": 20,
+      "games_lost": 21,
+      "status": "eliminated"
+    }
+  },
+  {
+    "model": "app.participant",
+    "pk": 3,
+    "fields": {
+      "user": 4,
+      "tournament": 3,
+      "score": 300,
+      "matches_won": 1,
+      "sets_won": 1,
+      "games_won": 17,
+      "games_lost": 20,
+      "status": "eliminated"
+    }
+  },
+  {
+    "model": "app.participant",
+    "pk": 4,
+    "fields": {
+      "user": 5,
+      "tournament": 3,
+      "score": 325,
+      "matches_won": 1,
+      "sets_won": 2,
+      "games_won": 19,
+      "games_lost": 26,
+      "status": "eliminated"
+    }
+  },
+  {
+    "model": "app.participant",
+    "pk": 5,
+    "fields": {
+      "user": 6,
+      "tournament": 3,
+      "score": 475,
+      "matches_won": 2,
+      "sets_won": 5,
+      "games_won": 41,
+      "games_lost": 43,
+      "status": "eliminated"
+    }
+  },
+  {
+    "model": "app.participant",
+    "pk": 6,
+    "fields": {
+      "user": 7,
+      "tournament": 3,
+      "score": 500,
+      "matches_won": 3,
+      "sets_won": 6,
+      "games_won": 40,
+      "games_lost": 41,
+      "status": "eliminated"
+    }
+  },
+  {
+    "model": "app.participant",
+    "pk": 7,
+    "fields": {
+      "user": 8,
+      "tournament": 3,
+      "score": 250,
+      "matches_won": 1,
+      "sets_won": 1,
+      "games_won": 14,
+      "games_lost": 19,
+      "status": "eliminated"
+    }
+  },
+  {
+    "model": "app.participant",
+    "pk": 8,
+    "fields": {
+      "user": 9,
+      "tournament": 3,
+      "score": 1000,
+      "matches_won": 3,
+      "sets_won": 6,
+      "games_won": 45,
+      "games_lost": 53,
+      "status": "eliminated"
+    }
+  },
+  {
+    "model": "app.participant",
+    "pk": 9,
+    "fields": {
+      "user": 10,
+      "tournament": 3,
+      "score": 275,
+      "matches_won": 1,
+      "sets_won": 1,
+      "games_won": 15,
+      "games_lost": 19,
+      "status": "eliminated"
+    }
+  },
+  {
+    "model": "app.participant",
+    "pk": 10,
+    "fields": {
+      "user": 11,
+      "tournament": 3,
+      "score": 425,
+      "matches_won": 2,
+      "sets_won": 3,
+      "games_won": 35,
+      "games_lost": 37,
+      "status": "eliminated"
+    }
+  },
+  {
+    "model": "app.participant",
+    "pk": 11,
+    "fields": {
+      "user": 12,
+      "tournament": 3,
+      "score": 450,
+      "matches_won": 2,
+      "sets_won": 4,
+      "games_won": 34,
+      "games_lost": 38,
+      "status": "eliminated"
+    }
+  },
+  {
+    "model": "app.participant",
+    "pk": 12,
+    "fields": {
+      "user": 13,
+      "tournament": 3,
+      "score": 225,
+      "matches_won": 1,
+      "sets_won": 0,
+      "games_won": 8,
+      "games_lost": 18,
+      "status": "eliminated"
+    }
+  },
+  {
+    "model": "app.participant",
+    "pk": 13,
+    "fields": {
+      "user": 14,
+      "tournament": 3,
+      "score": 400,
+      "matches_won": 2,
+      "sets_won": 3,
+      "games_won": 33,
+      "games_lost": 39,
+      "status": "eliminated"
+    }
+  },
+  {
+    "model": "app.participant",
+    "pk": 14,
+    "fields": {
+      "user": 15,
+      "tournament": 3,
+      "score": 1500,
+      "matches_won": 4,
+      "sets_won": 9,
+      "games_won": 57,
+      "games_lost": 38,
+      "status": "eliminated"
+    }
+  },
+  {
+    "model": "app.participant",
+    "pk": 15,
+    "fields": {
+      "user": 18,
+      "tournament": 3,
+      "score": 2000,
+      "matches_won": 5,
+      "sets_won": 9,
+      "games_won": 57,
+      "games_lost": 20,
+      "status": "active"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 1,
+    "fields": {
+      "tournament": 3,
+      "participant1": 3,
+      "participant2": 11,
+      "date": "2024-10-01T12:52:10Z",
+      "round": "octavos"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 2,
+    "fields": {
+      "tournament": 3,
+      "participant1": 8,
+      "participant2": 9,
+      "date": "2024-10-02T12:52:10Z",
+      "round": "octavos"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 3,
+    "fields": {
+      "tournament": 3,
+      "participant1": 2,
+      "participant2": 5,
+      "date": "2024-10-03T12:52:10Z",
+      "round": "octavos"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 4,
+    "fields": {
+      "tournament": 3,
+      "participant1": 13,
+      "participant2": 1,
+      "date": "2024-10-04T12:52:10Z",
+      "round": "octavos"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 5,
+    "fields": {
+      "tournament": 3,
+      "participant1": 10,
+      "participant2": 4,
+      "date": "2024-10-07T12:52:10Z",
+      "round": "octavos"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 6,
+    "fields": {
+      "tournament": 3,
+      "participant1": 12,
+      "participant2": 14,
+      "date": "2024-10-08T12:52:10Z",
+      "round": "octavos"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 7,
+    "fields": {
+      "tournament": 3,
+      "participant1": 7,
+      "participant2": 6,
+      "date": "2024-10-09T12:52:10Z",
+      "round": "octavos"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 8,
+    "fields": {
+      "tournament": 3,
+      "participant1": 13,
+      "participant2": 6,
+      "date": "2024-10-17T12:56:24Z",
+      "round": "cuartos"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 9,
+    "fields": {
+      "tournament": 3,
+      "participant1": 8,
+      "participant2": 5,
+      "date": "2024-10-18T12:56:24Z",
+      "round": "cuartos"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 10,
+    "fields": {
+      "tournament": 3,
+      "participant1": 11,
+      "participant2": 15,
+      "date": "2024-10-22T12:56:24Z",
+      "round": "cuartos"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 11,
+    "fields": {
+      "tournament": 3,
+      "participant1": 14,
+      "participant2": 10,
+      "date": "2024-10-21T12:56:24Z",
+      "round": "cuartos"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 12,
+    "fields": {
+      "tournament": 3,
+      "participant1": 15,
+      "participant2": 8,
+      "date": "2024-11-21T22:30:05.227Z",
+      "round": "semifinal"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 13,
+    "fields": {
+      "tournament": 3,
+      "participant1": 14,
+      "participant2": 6,
+      "date": "2024-11-22T22:30:05.227Z",
+      "round": "semifinal"
+    }
+  },
+  {
+    "model": "app.match",
+    "pk": 14,
+    "fields": {
+      "tournament": 3,
+      "participant1": 15,
+      "participant2": 14,
+      "date": "2024-11-21T22:30:34.239Z",
+      "round": "final"
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 1,
+    "fields": {
+      "set_number": 1,
+      "match": 1,
+      "participant1_score": 4,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 2,
+    "fields": {
+      "set_number": 2,
+      "match": 1,
+      "participant1_score": 3,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 3,
+    "fields": {
+      "set_number": 3,
+      "match": 1,
+      "participant1_score": 6,
+      "participant2_score": 2
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 4,
+    "fields": {
+      "set_number": 4,
+      "match": 1,
+      "participant1_score": 4,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 5,
+    "fields": {
+      "set_number": 5,
+      "match": 1,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 6,
+    "fields": {
+      "set_number": 1,
+      "match": 2,
+      "participant1_score": 1,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 7,
+    "fields": {
+      "set_number": 2,
+      "match": 2,
+      "participant1_score": 6,
+      "participant2_score": 4
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 8,
+    "fields": {
+      "set_number": 3,
+      "match": 2,
+      "participant1_score": 6,
+      "participant2_score": 3
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 9,
+    "fields": {
+      "set_number": 4,
+      "match": 2,
+      "participant1_score": 6,
+      "participant2_score": 2
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 10,
+    "fields": {
+      "set_number": 5,
+      "match": 2,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 11,
+    "fields": {
+      "set_number": 1,
+      "match": 3,
+      "participant1_score": 4,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 12,
+    "fields": {
+      "set_number": 2,
+      "match": 3,
+      "participant1_score": 2,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 13,
+    "fields": {
+      "set_number": 3,
+      "match": 3,
+      "participant1_score": 6,
+      "participant2_score": 2
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 14,
+    "fields": {
+      "set_number": 4,
+      "match": 3,
+      "participant1_score": 6,
+      "participant2_score": 1
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 15,
+    "fields": {
+      "set_number": 5,
+      "match": 3,
+      "participant1_score": 2,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 16,
+    "fields": {
+      "set_number": 1,
+      "match": 4,
+      "participant1_score": 4,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 17,
+    "fields": {
+      "set_number": 2,
+      "match": 4,
+      "participant1_score": 2,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 18,
+    "fields": {
+      "set_number": 3,
+      "match": 4,
+      "participant1_score": 6,
+      "participant2_score": 2
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 19,
+    "fields": {
+      "set_number": 4,
+      "match": 4,
+      "participant1_score": 6,
+      "participant2_score": 4
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 20,
+    "fields": {
+      "set_number": 5,
+      "match": 4,
+      "participant1_score": 6,
+      "participant2_score": 3
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 21,
+    "fields": {
+      "set_number": 1,
+      "match": 5,
+      "participant1_score": 6,
+      "participant2_score": 4
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 22,
+    "fields": {
+      "set_number": 2,
+      "match": 5,
+      "participant1_score": 4,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 23,
+    "fields": {
+      "set_number": 3,
+      "match": 5,
+      "participant1_score": 6,
+      "participant2_score": 1
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 24,
+    "fields": {
+      "set_number": 4,
+      "match": 5,
+      "participant1_score": 4,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 25,
+    "fields": {
+      "set_number": 5,
+      "match": 5,
+      "participant1_score": 6,
+      "participant2_score": 2
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 26,
+    "fields": {
+      "set_number": 1,
+      "match": 6,
+      "participant1_score": 4,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 27,
+    "fields": {
+      "set_number": 2,
+      "match": 6,
+      "participant1_score": 2,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 28,
+    "fields": {
+      "set_number": 3,
+      "match": 6,
+      "participant1_score": 2,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 29,
+    "fields": {
+      "set_number": 4,
+      "match": 6,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 30,
+    "fields": {
+      "set_number": 5,
+      "match": 6,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 31,
+    "fields": {
+      "set_number": 1,
+      "match": 7,
+      "participant1_score": 6,
+      "participant2_score": 1
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 32,
+    "fields": {
+      "set_number": 2,
+      "match": 7,
+      "participant1_score": 4,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 33,
+    "fields": {
+      "set_number": 3,
+      "match": 7,
+      "participant1_score": 2,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 34,
+    "fields": {
+      "set_number": 4,
+      "match": 7,
+      "participant1_score": 2,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 35,
+    "fields": {
+      "set_number": 5,
+      "match": 7,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 36,
+    "fields": {
+      "set_number": 1,
+      "match": 8,
+      "participant1_score": 4,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 37,
+    "fields": {
+      "set_number": 2,
+      "match": 8,
+      "participant1_score": 2,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 38,
+    "fields": {
+      "set_number": 3,
+      "match": 8,
+      "participant1_score": 3,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 39,
+    "fields": {
+      "set_number": 4,
+      "match": 8,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 40,
+    "fields": {
+      "set_number": 5,
+      "match": 8,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 41,
+    "fields": {
+      "set_number": 1,
+      "match": 9,
+      "participant1_score": 3,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 42,
+    "fields": {
+      "set_number": 2,
+      "match": 9,
+      "participant1_score": 6,
+      "participant2_score": 4
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 43,
+    "fields": {
+      "set_number": 3,
+      "match": 9,
+      "participant1_score": 2,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 44,
+    "fields": {
+      "set_number": 4,
+      "match": 9,
+      "participant1_score": 6,
+      "participant2_score": 1
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 45,
+    "fields": {
+      "set_number": 5,
+      "match": 9,
+      "participant1_score": 6,
+      "participant2_score": 3
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 46,
+    "fields": {
+      "set_number": 1,
+      "match": 10,
+      "participant1_score": 4,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 47,
+    "fields": {
+      "set_number": 2,
+      "match": 10,
+      "participant1_score": 1,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 48,
+    "fields": {
+      "set_number": 3,
+      "match": 10,
+      "participant1_score": 6,
+      "participant2_score": 3
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 49,
+    "fields": {
+      "set_number": 4,
+      "match": 10,
+      "participant1_score": 3,
+      "participant2_score": 6
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 50,
+    "fields": {
+      "set_number": 5,
+      "match": 10,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 51,
+    "fields": {
+      "set_number": 1,
+      "match": 11,
+      "participant1_score": 6,
+      "participant2_score": 2
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 52,
+    "fields": {
+      "set_number": 2,
+      "match": 11,
+      "participant1_score": 6,
+      "participant2_score": 3
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 53,
+    "fields": {
+      "set_number": 3,
+      "match": 11,
+      "participant1_score": 6,
+      "participant2_score": 4
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 54,
+    "fields": {
+      "set_number": 4,
+      "match": 11,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 55,
+    "fields": {
+      "set_number": 5,
+      "match": 11,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 56,
+    "fields": {
+      "set_number": 1,
+      "match": 13,
+      "participant1_score": 6,
+      "participant2_score": 1
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 57,
+    "fields": {
+      "set_number": 2,
+      "match": 13,
+      "participant1_score": 6,
+      "participant2_score": 1
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 58,
+    "fields": {
+      "set_number": 3,
+      "match": 13,
+      "participant1_score": 6,
+      "participant2_score": 1
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 59,
+    "fields": {
+      "set_number": 4,
+      "match": 13,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 60,
+    "fields": {
+      "set_number": 5,
+      "match": 13,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 61,
+    "fields": {
+      "set_number": 1,
+      "match": 12,
+      "participant1_score": 6,
+      "participant2_score": 1
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 62,
+    "fields": {
+      "set_number": 2,
+      "match": 12,
+      "participant1_score": 6,
+      "participant2_score": 1
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 63,
+    "fields": {
+      "set_number": 3,
+      "match": 12,
+      "participant1_score": 6,
+      "participant2_score": 1
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 64,
+    "fields": {
+      "set_number": 4,
+      "match": 12,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 65,
+    "fields": {
+      "set_number": 5,
+      "match": 12,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 66,
+    "fields": {
+      "set_number": 1,
+      "match": 14,
+      "participant1_score": 6,
+      "participant2_score": 1
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 67,
+    "fields": {
+      "set_number": 2,
+      "match": 14,
+      "participant1_score": 6,
+      "participant2_score": 1
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 68,
+    "fields": {
+      "set_number": 3,
+      "match": 14,
+      "participant1_score": 6,
+      "participant2_score": 1
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 69,
+    "fields": {
+      "set_number": 4,
+      "match": 14,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "app.set",
+    "pk": 70,
+    "fields": {
+      "set_number": 5,
+      "match": 14,
+      "participant1_score": null,
+      "participant2_score": null
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+      "name": "Can add user",
+      "content_type": 1,
+      "codename": "add_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+      "name": "Can change user",
+      "content_type": 1,
+      "codename": "change_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+      "name": "Can delete user",
+      "content_type": 1,
+      "codename": "delete_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+      "name": "Can view user",
+      "content_type": 1,
+      "codename": "view_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+      "name": "Can add participant",
+      "content_type": 2,
+      "codename": "add_participant"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+      "name": "Can change participant",
+      "content_type": 2,
+      "codename": "change_participant"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+      "name": "Can delete participant",
+      "content_type": 2,
+      "codename": "delete_participant"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+      "name": "Can view participant",
+      "content_type": 2,
+      "codename": "view_participant"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+      "name": "Can add match",
+      "content_type": 3,
+      "codename": "add_match"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+      "name": "Can change match",
+      "content_type": 3,
+      "codename": "change_match"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+      "name": "Can delete match",
+      "content_type": 3,
+      "codename": "delete_match"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+      "name": "Can view match",
+      "content_type": 3,
+      "codename": "view_match"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+      "name": "Can add set",
+      "content_type": 4,
+      "codename": "add_set"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+      "name": "Can change set",
+      "content_type": 4,
+      "codename": "change_set"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+      "name": "Can delete set",
+      "content_type": 4,
+      "codename": "delete_set"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+      "name": "Can view set",
+      "content_type": 4,
+      "codename": "view_set"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+      "name": "Can add tournament",
+      "content_type": 5,
+      "codename": "add_tournament"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+      "name": "Can change tournament",
+      "content_type": 5,
+      "codename": "change_tournament"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+      "name": "Can delete tournament",
+      "content_type": 5,
+      "codename": "delete_tournament"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+      "name": "Can view tournament",
+      "content_type": 5,
+      "codename": "view_tournament"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+      "name": "Can add log entry",
+      "content_type": 6,
+      "codename": "add_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+      "name": "Can change log entry",
+      "content_type": 6,
+      "codename": "change_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+      "name": "Can delete log entry",
+      "content_type": 6,
+      "codename": "delete_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+      "name": "Can view log entry",
+      "content_type": 6,
+      "codename": "view_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+      "name": "Can add permission",
+      "content_type": 7,
+      "codename": "add_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+      "name": "Can change permission",
+      "content_type": 7,
+      "codename": "change_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+      "name": "Can delete permission",
+      "content_type": 7,
+      "codename": "delete_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+      "name": "Can view permission",
+      "content_type": 7,
+      "codename": "view_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+      "name": "Can add group",
+      "content_type": 8,
+      "codename": "add_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+      "name": "Can change group",
+      "content_type": 8,
+      "codename": "change_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+      "name": "Can delete group",
+      "content_type": 8,
+      "codename": "delete_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+      "name": "Can view group",
+      "content_type": 8,
+      "codename": "view_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+      "name": "Can add content type",
+      "content_type": 9,
+      "codename": "add_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+      "name": "Can change content type",
+      "content_type": 9,
+      "codename": "change_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+      "name": "Can delete content type",
+      "content_type": 9,
+      "codename": "delete_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+      "name": "Can view content type",
+      "content_type": 9,
+      "codename": "view_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+      "name": "Can add session",
+      "content_type": 10,
+      "codename": "add_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+      "name": "Can change session",
+      "content_type": 10,
+      "codename": "change_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+      "name": "Can delete session",
+      "content_type": 10,
+      "codename": "delete_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+      "name": "Can view session",
+      "content_type": 10,
+      "codename": "view_session"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": { "app_label": "app", "model": "user" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": { "app_label": "app", "model": "participant" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": { "app_label": "app", "model": "match" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": { "app_label": "app", "model": "set" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": { "app_label": "app", "model": "tournament" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": { "app_label": "admin", "model": "logentry" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": { "app_label": "auth", "model": "permission" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": { "app_label": "auth", "model": "group" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": { "app_label": "contenttypes", "model": "contenttype" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": { "app_label": "sessions", "model": "session" }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "m5fgi8b8k176npfp7totzqum4mdz9igc",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQRO_iGln-xD9K-pzBWnvXOIAcKU4qxN1JpBTQjea9mTeLsK01bp2WOCG7Mskuv12C_KR2AHxAu888z21dpsQPhZ-083FGet1O9--gQq_7WhCis84nhwYFCT-ABqOcLUGDglx8sUYGSEWFPSehfZF58E5Ir2Um9vkC8EM4Dw:1tDWh4:ya22VQQKZIT6X8v05E3zHIA63RWgxVjmB5hWl0yqCp0",
+      "expire_date": "2024-12-03T22:27:34.816Z"
+    }
+  }
+]

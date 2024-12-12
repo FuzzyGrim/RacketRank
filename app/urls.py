@@ -43,5 +43,6 @@ urlpatterns = [
         views.match,
         name="match",
     ),
+    path("global-ranking", views.global_ranking, name="global_ranking"),
     path("perfil", views.profile, name="profile"),
 ]

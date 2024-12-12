@@ -4,6 +4,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import PasswordResetView
 from django.core.management.utils import get_random_secret_key
+from django.db.models import F, Sum
+from django.db.models.functions import Random
 from django.shortcuts import redirect, render
 from django_email_verification import send_email
 
@@ -188,6 +190,34 @@ def standings(request, tournament):
     )
     context = {"tournament": tournament, "participants": participants}
     return render(request, "app/standings.html", context)
+
+
+@login_required
+def global_ranking(request):
+    """Global ranking view."""
+    rankings = (
+        get_user_model().objects.annotate(
+            total_sets_won=Sum("participant__sets_won"),
+            total_games_won=Sum("participant__games_won"),
+            total_games_lost=Sum("participant__games_lost"),
+            # Add random value for consistent tie-breaking within a single request
+            random_order=Random(),
+        )
+        .filter(
+            # Only include users who have participated in tournaments
+            participant__isnull=False,
+        )
+        .order_by(
+            # Order by our criteria
+            F("total_sets_won").desc(nulls_last=True),
+            F("total_games_won").desc(nulls_last=True),
+            F("total_games_lost").asc(nulls_last=True),
+            "random_order",
+        )
+        .distinct()
+    )
+    context = {"rankings": rankings}
+    return render(request, "app/global-ranking.html", context)
 
 
 @login_required

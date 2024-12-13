@@ -41,8 +41,8 @@
                    class="inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium {% block tournament_tab %}text-gray-500 border-transparent hover:border-gray-300 hover:text-gray-700{% endblock tournament_tab %}">Torneos</a>
                 <a href="{% url 'global_ranking' %}"
                    class="inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium {% block global_ranking_tab %}text-gray-500 border-transparent hover:border-gray-300 hover:text-gray-700{% endblock global_ranking_tab %}">Ranking Global</a>
-                <a href="#"
-                   class="inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium {% block personal_stats_tab %}text-gray-500 border-transparent hover:border-gray-300 hover:text-gray-700{% endblock personal_stats_tab %}">Estadísticas Personal</a>
+                <a href="{% url 'personal_stats' %}"
+                   class="inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium {% block personal_stats_tab %}text-gray-500 border-transparent hover:border-gray-300 hover:text-gray-700{% endblock personal_stats_tab %}">Estadísticas Personales</a>
                 <a href="{% url 'history' %}"
                    class="inline-flex items-center border-b-2 px-1 pt-1 text-sm font-medium {% block history_tab %}text-gray-500 border-transparent hover:border-gray-300 hover:text-gray-700{% endblock history_tab %}">Historial</a>
               </div>

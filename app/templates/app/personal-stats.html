@@ -1,0 +1,87 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% load nav_tags %}
+
+{% block title %}
+  RacketRank - Historial
+{% endblock title %}
+
+{% block personal_stats_tab %}
+  border-emerald-500 text-gray-900
+{% endblock personal_stats_tab %}
+
+{% block content %}
+  <div class="mx-auto max-w-7xl py-12 sm:px-6 lg:px-8">
+    <div class="mx-auto max-w-4xl">
+      <div class="overflow-hidden bg-white shadow sm:rounded-lg">
+        <div class="px-4 py-6 sm:px-6">
+          <h1 class="text-2xl/7 font-semibold text-gray-900 text-center">Mis Estadísticas</h1>
+        </div>
+
+        <div class="border-t border-gray-100">
+          <div class="rounded-b-lg p-4">
+            <div class="rounded mb-4 flex justify-between items-center shadow-md p-4">
+              <svg xmlns="http://www.w3.org/2000/svg"
+                   class="h-8 w-8 text-green-600"
+                   fill="none"
+                   viewBox="0 0 24 24"
+                   stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+              <div class="text-right">
+                <p class="text-2xl font-bold text-emerald-800">Ranking Global: {{ overall_ranking }}</p>
+                <p class="text-sm text-emerald-600">{{ total_points }} puntos</p>
+              </div>
+            </div>
+
+            {% for tournament in tournament_stats %}
+              <div class="border-b last:border-b-0 p-4 mb-4 rounded shadow-md">
+                <div class="flex justify-between items-center mb-6">
+                  <h3 class="text-lg font-semibold text-gray-800 mt-2">Torneo de {{ tournament.tournament_name }}</h3>
+                  <div class="flex space-x-2">
+                    <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded text-sm">Points: {{ tournament.score }}</span>
+                    <span class="px-2 py-1 rounded text-sm {% if tournament.total_sets_won > tournament.total_sets_lost %}bg-green-100 text-green-800{% else %}bg-red-100 text-red-800{% endif %}">
+                      Sets: {{ tournament.total_sets_won }} - {{ tournament.total_sets_lost }}
+                    </span>
+                  </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                  {% for match in tournament.matches %}
+                    <table class="w-full mb-4">
+                      <thead>
+                        <tr class="bg-gray-100 text-gray-600">
+                          <th class="p-2 text-left w-32">{{ match.round|title }}</th>
+                          <th class="p-2 text-center">Games Won</th>
+                          <th class="p-2 text-center">Games Lost</th>
+                          <th class="p-2 text-center">Result</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for set in match.sets %}
+                          <tr class="border-t hover:bg-gray-50 transition-colors">
+                            <td class="p-2 font-medium w-32">Set {{ set.set_number }}</td>
+                            <td class="p-2 text-center text-green-700">{{ set.games_won }}</td>
+                            <td class="p-2 text-center text-red-700">{{ set.games_lost }}</td>
+                            <td class="p-2 text-center">
+                              <span class="px-2 py-1 rounded text-sm {% if set.result == 'Won' %}bg-green-100 text-green-800{% else %}bg-red-100 text-red-800{% endif %}">
+                                {{ set.result }}
+                              </span>
+                            </td>
+                          </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+
+                    <div class="border mb-4"></div>
+                  {% endfor %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

@@ -222,6 +222,20 @@ def global_ranking(request):
 
 
 @login_required
+def personal_stats(request):
+    """Personal statistics view."""
+    user_stats = request.user.get_statistics()
+
+    context = {
+        "tournament_stats": user_stats.get_tournament_stats(),
+        "total_points": user_stats.total_points,
+        "overall_ranking": user_stats.overall_ranking,
+    }
+
+    return render(request, "app/personal-stats.html", context)
+
+
+@login_required
 def history(request):
     """User tournaments view."""
     played_tournaments = models.Tournament.objects.get_played_tournaments(request.user)

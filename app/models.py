@@ -4,8 +4,8 @@ from random import shuffle
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.db.models import F
-from django.db.models.functions import Random
+from django.db.models import F, Q, Sum, Window
+from django.db.models.functions import Coalesce, DenseRank, Random
 from django.utils import timezone
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -21,10 +21,171 @@ round_choices = [
 ]
 
 
+class UserStatistics:
+    """Class to handle user statistics calculations."""
+
+    def __init__(self, user):
+        """Initialize with user."""
+        self.user = user
+        self._participants = Participant.objects.filter(user=user)
+
+    @property
+    def total_points(self):
+        """Calculate total points across all tournaments."""
+        return self._participants.aggregate(
+            total=Coalesce(Sum("score"), 0),
+        )["total"]
+
+    def get_tournament_stats(self):
+        """Get detailed tournament statistics including set-by-set breakdown."""
+        round_order = {
+            "octavos": 1,
+            "cuartos": 2,
+            "semifinal": 3,
+            "final": 4,
+        }
+
+        tournaments_data = []
+
+        # Get all finished tournaments for the user
+        finished_tournaments = self._participants.filter(
+            tournament__current_round="finalizado",
+        ).select_related("tournament")
+
+        for participant in finished_tournaments:
+            # Get all matches where the user participated
+            matches = (
+                Match.objects.filter(
+                    tournament=participant.tournament,
+                )
+                .filter(
+                    Q(participant1=participant) | Q(participant2=participant),
+                )
+                .select_related(
+                    "participant1",
+                    "participant2",
+                )
+                .order_by("date")
+            )
+
+            matches_data = []
+            total_sets_won = 0
+            total_sets_lost = 0
+
+            for match in matches:
+                # Determine if the user was participant1 or participant2
+                is_participant1 = match.participant1 == participant
+                opponent = (
+                    match.participant2.user.username
+                    if is_participant1
+                    else match.participant1.user.username
+                )
+
+                # Get all sets for this match
+                match_sets = match.set_set.all().order_by("set_number")
+                sets_data = []
+                match_sets_won = 0
+                match_sets_lost = 0
+
+                for set_obj in match_sets:
+                    if is_participant1:
+                        games_won = set_obj.participant1_score or 0
+                        games_lost = set_obj.participant2_score or 0
+                    else:
+                        games_won = set_obj.participant2_score or 0
+                        games_lost = set_obj.participant1_score or 0
+
+                    # Count sets won/lost
+                    if games_won > games_lost:
+                        match_sets_won += 1
+                        total_sets_won += 1
+                    elif games_lost > games_won:
+                        match_sets_lost += 1
+                        total_sets_lost += 1
+
+                    sets_data.append(
+                        {
+                            "set_number": set_obj.set_number,
+                            "games_won": games_won,
+                            "games_lost": games_lost,
+                            "result": "Won"
+                            if games_won > games_lost
+                            else "Lost"
+                            if games_won < games_lost
+                            else "Tie",
+                        },
+                    )
+
+                matches_data.append(
+                    {
+                        "round": match.round,
+                        "round_order": round_order.get(match.round, 0),  # For sorting
+                        "opponent": opponent,
+                        "date": match.date,
+                        "sets_won": match_sets_won,
+                        "sets_lost": match_sets_lost,
+                        "sets": sets_data,
+                        "result": "Won"
+                        if match_sets_won > match_sets_lost
+                        else "Lost"
+                        if match_sets_won < match_sets_lost
+                        else "Tie",
+                    },
+                )
+
+            # Sort matches by round order
+            matches_data.sort(key=lambda x: x["round_order"])
+
+            # Remove round_order as it's no longer needed
+            for match in matches_data:
+                del match["round_order"]
+
+            tournaments_data.append(
+                {
+                    "tournament_name": participant.tournament.name,
+                    "score": participant.score,
+                    "total_games_won": participant.games_won,
+                    "total_games_lost": participant.games_lost,
+                    "total_sets_won": total_sets_won,
+                    "total_sets_lost": total_sets_lost,
+                    "matches": matches_data,
+                },
+            )
+
+        return tournaments_data
+
+    @property
+    def overall_ranking(self):
+        """Calculate overall ranking based on total points."""
+        ranking = (
+            User.objects.annotate(
+                total_score=Coalesce(
+                    Sum("tournaments__participant__score"),
+                    0,
+                ),
+                rank=Window(
+                    expression=DenseRank(),
+                    order_by=F("total_score").desc(),
+                ),
+            )
+            .filter(
+                id=self.user.id,
+            )
+            .values_list("rank", flat=True)
+            .first()
+        )
+
+        return ranking or 0
+
+
 class User(AbstractUser):
     """Custom user model."""
 
     telefono = PhoneNumberField(unique=True)
+
+    def get_statistics(self):
+        """Get user statistics."""
+        return UserStatistics(self)
 
 
 class UserTournamentManager(models.Manager):

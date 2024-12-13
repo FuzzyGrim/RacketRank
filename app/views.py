@@ -88,6 +88,17 @@ def tournament(request, tournament):
 
 
 @login_required
+@staff_member_required
+def select_participants(request, tournament):
+    """Select participants for the tournament."""
+    tournament = models.Tournament.objects.get(name=tournament.capitalize())
+
+    if request.method == "POST":
+        tournament.select_participants()
+    return redirect("matches", tournament=tournament.name.lower())
+
+
+@login_required
 def matches(request, tournament):
     """Match view."""
     tournament_obj = models.Tournament.objects.get(name=tournament.capitalize())
@@ -189,7 +200,7 @@ def standings(request, tournament):
         models.Participant.objects.filter(tournament=tournament)
         .exclude(status="applied")
         .order_by(
-        "-score",
+            "-score",
         )
     )
     context = {"tournament": tournament, "participants": participants}

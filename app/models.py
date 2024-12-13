@@ -3,7 +3,7 @@ import logging
 from random import shuffle
 
 from django.contrib.auth.models import AbstractUser
-from django.db import models
+from django.db import models, transaction
 from django.db.models import F, Q, Sum, Window
 from django.db.models.functions import Coalesce, DenseRank, Random
 from django.utils import timezone
@@ -297,6 +297,62 @@ class Tournament(models.Model):
         # check if all games have winners
         matches = self.match_set.filter(round=self.current_round)
         return all(match.winner for match in matches)
+
+    def select_participants(self, max_participants=16):
+        """Select participants for the tournament.
+
+        Only selects from users who have applied to the tournament.
+        """
+        # Get all applied participants
+        applied_participants = self.participant_set.filter(
+            status="applied",
+        ).select_related("user")
+
+        # Annotate participants with their global statistics
+        ranked_participants = applied_participants.annotate(
+            total_score=Coalesce(
+                Sum(
+                    "user__tournaments__participant__score",
+                    filter=Q(user__tournaments__current_round="finalizado"),
+                ),
+                0,
+            ),
+            total_sets_won=Coalesce(
+                Sum(
+                    "user__tournaments__participant__sets_won",
+                    filter=Q(user__tournaments__current_round="finalizado"),
+                ),
+                0,
+            ),
+            total_games_won=Coalesce(
+                Sum(
+                    "user__tournaments__participant__games_won",
+                    filter=Q(user__tournaments__current_round="finalizado"),
+                ),
+                0,
+            ),
+            total_games_lost=Coalesce(
+                Sum(
+                    "user__tournaments__participant__games_lost",
+                    filter=Q(user__tournaments__current_round="finalizado"),
+                ),
+                0,
+            ),
+        ).order_by(
+            F("total_score").desc(),
+            F("total_sets_won").desc(),
+            F("total_games_won").desc(),
+            F("total_games_lost"),
+            Random(),
+        )[:max_participants]
+
+        # Update status of selected and non-selected participants
+        with transaction.atomic():
+            # Set selected participants to active
+            selected_ids = ranked_participants.values_list("id", flat=True)
+            self.participant_set.filter(id__in=selected_ids).update(
+                status="active",
+            )
 
     def settle_round(self):
         """Settle the current round."""

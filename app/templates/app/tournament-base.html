@@ -7,7 +7,7 @@
 {% endblock title %}
 
 {% block tournament_tab %}
-border-emerald-500 text-gray-900
+  border-emerald-500 text-gray-900
 {% endblock tournament_tab %}
 
 {% block content %}
@@ -18,7 +18,21 @@ border-emerald-500 text-gray-900
           <div class="flex gap-4">
             <h1 class="text-2xl/7 font-semibold text-gray-900">Torneo de {{ tournament.name }}</h1>
 
-            {% if not request.user.is_superuser %}
+            {% if request.user.is_superuser %}
+              {% now "Y-m-d" as todays_date %}
+              {% if todays_date >= tournament.inscription_end_date|date:"Y-m-d" %}
+                <form method="post"
+                      action="{% url 'select_participants' tournament.name|lower %}">
+                  {% csrf_token %}
+                  <button type="submit"
+                          {% if tournament.participant_set.all %}disabled{% endif %}
+                          name="select_participants"
+                          class="relative inline-flex items-center gap-x-1.5 rounded-md bg-emerald-600 px-3 py-2 text-sm font-semibold text-white shadow-sm enabled:hover:bg-emerald-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600 disabled:opacity-60">
+                    <span>Escoger Participantes</span>
+                  </button>
+                </form>
+              {% endif %}
+            {% else %}
               <div class="shrink-0">
                 {% if user_applied %}
                   <form method="post">

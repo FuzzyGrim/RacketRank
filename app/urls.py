@@ -44,5 +44,6 @@ urlpatterns = [
         name="match",
     ),
     path("global-ranking", views.global_ranking, name="global_ranking"),
+    path("historial", views.history, name="history"),
     path("perfil", views.profile, name="profile"),
 ]

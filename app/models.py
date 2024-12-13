@@ -27,6 +27,35 @@ class User(AbstractUser):
     telefono = PhoneNumberField(unique=True)
 
 
+class UserTournamentManager(models.Manager):
+    """Manager for user tournament-related queries."""
+
+    def get_played_tournaments(self, user):
+        """Return tournaments where the user has participated and which are finished."""
+        return self.filter(
+            participants=user,
+            participant__status__in=["active", "eliminated"],
+            current_round="finalizado",
+        ).select_related()
+
+    def get_registered_tournaments(self, user):
+        """Return tournaments where the user has registered but haven't started."""
+        today = timezone.now().date()
+        return self.filter(
+            participants=user,
+            participant__status="applied",
+            start_date__gt=today,
+        ).select_related()
+
+    def get_active_tournaments(self, user):
+        """Return tournaments where the user will participate."""
+        return self.filter(
+            participants=user,
+            participant__status="active",
+            current_round="no_comenzado",
+        ).select_related()
+
+
 class Tournament(models.Model):
     """Tournament model."""
 
@@ -47,6 +76,8 @@ class Tournament(models.Model):
         choices=round_choices,
         default="no_comenzado",
     )
+
+    objects = UserTournamentManager()
 
     def __str__(self):
         """Return name."""

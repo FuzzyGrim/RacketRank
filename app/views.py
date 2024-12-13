@@ -196,7 +196,8 @@ def standings(request, tournament):
 def global_ranking(request):
     """Global ranking view."""
     rankings = (
-        get_user_model().objects.annotate(
+        get_user_model()
+        .objects.annotate(
             total_sets_won=Sum("participant__sets_won"),
             total_games_won=Sum("participant__games_won"),
             total_games_lost=Sum("participant__games_lost"),
@@ -218,6 +219,36 @@ def global_ranking(request):
     )
     context = {"rankings": rankings}
     return render(request, "app/global-ranking.html", context)
+
+
+@login_required
+def history(request):
+    """User tournaments view."""
+    played_tournaments = models.Tournament.objects.get_played_tournaments(request.user)
+    played_tournaments_data = []
+    for tournament in played_tournaments:
+        participant = tournament.participant_set.get(user=request.user)
+        played_tournaments_data.append(
+            {
+                "name": tournament.name,
+                "start_date": tournament.start_date,
+                "end_date": tournament.end_date,
+                "score": participant.score,
+                "position": participant.position,
+            },
+        )
+
+    registered_tournaments = models.Tournament.objects.get_registered_tournaments(
+        request.user,
+    )
+    active_tournaments = models.Tournament.objects.get_active_tournaments(request.user)
+
+    context = {
+        "played_tournaments": played_tournaments_data,
+        "registered_tournaments": registered_tournaments,
+        "active_tournaments": active_tournaments,
+    }
+    return render(request, "app/history.html", context)
 
 
 @login_required

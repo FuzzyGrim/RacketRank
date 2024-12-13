@@ -185,8 +185,12 @@ def match(request, tournament, match_id):
 def standings(request, tournament):
     """Player standings view."""
     tournament = models.Tournament.objects.get(name=tournament.capitalize())
-    participants = models.Participant.objects.filter(tournament=tournament).order_by(
+    participants = (
+        models.Participant.objects.filter(tournament=tournament)
+        .exclude(status="applied")
+        .order_by(
         "-score",
+        )
     )
     context = {"tournament": tournament, "participants": participants}
     return render(request, "app/standings.html", context)

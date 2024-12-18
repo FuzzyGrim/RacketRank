@@ -108,11 +108,7 @@ class UserStatistics:
                             "set_number": set_obj.set_number,
                             "games_won": games_won,
                             "games_lost": games_lost,
-                            "result": "Won"
-                            if games_won > games_lost
-                            else "Lost"
-                            if games_won < games_lost
-                            else "Tie",
+                            "result": "Ganado" if games_won > games_lost else "Perdido",
                         },
                     )
 
@@ -125,11 +121,9 @@ class UserStatistics:
                         "sets_won": match_sets_won,
                         "sets_lost": match_sets_lost,
                         "sets": sets_data,
-                        "result": "Won"
+                        "result": "Ganado"
                         if match_sets_won > match_sets_lost
-                        else "Lost"
-                        if match_sets_won < match_sets_lost
-                        else "Tie",
+                        else "Perdido",
                     },
                 )
 

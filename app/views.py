@@ -139,9 +139,11 @@ def matches(request, tournament):
         key=lambda x: round_order[x["name"].lower()],
         reverse=True,
     )
+    user_applied = tournament_obj.participants.filter(id=request.user.id).exists()
 
     context = {
         "tournament": tournament_obj,
+        "user_applied": user_applied,
         "rounds": sorted_rounds,
         "can_generate_matches": (
             request.user.is_staff
@@ -203,7 +205,13 @@ def standings(request, tournament):
             "-score",
         )
     )
-    context = {"tournament": tournament, "participants": participants}
+    user_applied = tournament.participants.filter(id=request.user.id).exists()
+
+    context = {
+        "tournament": tournament,
+        "user_applied": user_applied,
+        "participants": participants,
+    }
     return render(request, "app/standings.html", context)
 
 

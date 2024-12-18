@@ -244,9 +244,9 @@ class Tournament(models.Model):
         today = timezone.now().date()
         if self.current_round == "finalizado":
             return "Finalizado"
-        if self.current_round == "no_comenzado" and today < self.start_date:
+        if self.current_round == "no_comenzado" and today < self.inscription_end_date:
             return "Inscripciones abiertas"
-        if today < self.start_date:
+        if today > self.inscription_end_date:
             return "Inscripciones cerradas"
         return "En curso"
 
@@ -347,6 +347,10 @@ class Tournament(models.Model):
             self.participant_set.filter(id__in=selected_ids).update(
                 status="active",
             )
+
+    def can_select_participants(self):
+        """Return if the tournament can select participants."""
+        return not self.participant_set.filter(status="active").exists()
 
     def settle_round(self):
         """Settle the current round."""

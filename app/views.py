@@ -95,7 +95,7 @@ def select_participants(request, tournament):
 
     if request.method == "POST":
         tournament.select_participants()
-    return redirect("matches", tournament=tournament.name.lower())
+    return redirect("tournament", tournament=tournament.name.lower())
 
 
 @login_required
